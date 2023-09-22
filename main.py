@@ -20,4 +20,3 @@ import timer
 # hangman.Hangman(["secret", "hello", "world"]).start()
 
 # timer.Timer(1, 2, 0).start()
-
