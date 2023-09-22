@@ -33,7 +33,6 @@ class Hangman:
 
             if guess not in word:
                 turns -= 1
-                print("Wrong")
-                print(f"You have {turns} more guesses")
+                print(f"Incorrect! You have {turns} more turns remaining.")
                 if turns == 0:
                     print("You Lose")
