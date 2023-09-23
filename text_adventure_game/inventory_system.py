@@ -32,16 +32,40 @@ class InventorySystem:
             return False
 
         slot = self.__get_slot_for_item(identifier)
+        item = self.get_item(identifier)
+        is_stackable = item.max_stack != 1
 
-        if slot is None:
-            slot = InventorySlot(identifier, amount)
-            self.slots.append(slot)
+        if is_stackable:
+            if slot is None:
+                slot = self.__add_new_slot(identifier, amount)
+            else:
+                slot.count += amount
+            self.__handle_slot_overflow(slot)
         else:
-            slot.count += amount
+            for _ in range(amount):
+                self.__add_new_slot(identifier, 1)
 
         print(f"Received '{amount}' of item '{identifier}'")
 
         return True
+
+    def __add_new_slot(self, identifier, amount) -> InventorySlot:
+        slot = InventorySlot(identifier, amount)
+        self.slots.append(slot)
+        return slot
+
+    def __handle_slot_overflow(self, slot: InventorySlot):
+        item = self.get_item(slot.identifier)
+
+        if slot.count < item.max_stack:
+            return
+
+        slot.count = item.max_stack
+
+        # count_diff = abs(slot.count - item.max_stack)
+        # slot.count = item.max_stack
+        # if count_diff > 0:
+        #     self.__add_new_slot(slot.identifier, count_diff)
 
     def add_random_item(self, amount):
         identifier = self.get_random_item_identifier()

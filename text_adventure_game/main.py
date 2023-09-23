@@ -25,13 +25,14 @@ class TextAdventureGame:
         ])
 
     def __print_player_inventory(self):
-        formatted_inventory = ["Inventory:\n"]
+        formatted_inventory = [f"Inventory ({len(self.player.inventory.slots)}):\n"]
         for inv_slot in self.player.inventory.slots:
             item = self.player.inventory.get_item(inv_slot.identifier)
+            base_str = f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label} (Value: {item.sell_price * inv_slot.count})"
             if type(item) == WeaponInventoryItem:
-                formatted_inventory.append(f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label} (DMG: {item.damage})")
+                formatted_inventory.append(f"{base_str} (DMG: {item.damage})")
             else:
-                formatted_inventory.append(f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label}")
+                formatted_inventory.append(base_str)
         helpers.print_string_section('-', formatted_inventory)
 
     def __do_return_countdown(self, timer):
