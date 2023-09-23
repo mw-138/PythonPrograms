@@ -3,15 +3,11 @@ import time
 
 
 class RockPaperScissors:
-    def __init__(self):
-        self.options = ["r", "p", "s"]
-        self.intro_sleep_interval = 0.75
-
-    def is_win(self, player, computer):
+    def __is_win(self, player, computer):
         return (player == "r" and computer == "s") or (player == "s" and computer == "p") or (
                 player == "p" and computer == "r")
 
-    def get_option_label(self, option):
+    def __get_option_label(self, option):
         option_labels = {
             "r": "Rock",
             "p": "Paper",
@@ -21,24 +17,19 @@ class RockPaperScissors:
 
     def start(self):
         player_choice = input("Enter choice (r/p/s): ")
-        random_choice = random.choice(self.options)
+        random_choice = random.choice(["r", "p", "s"])
 
-        print("Rock...")
-        time.sleep(self.intro_sleep_interval)
-        print("Paper...")
-        time.sleep(self.intro_sleep_interval)
-        print("Scissors...")
-        time.sleep(self.intro_sleep_interval)
-        print("Shoot!")
-        time.sleep(self.intro_sleep_interval)
+        for intro_label in ["Rock...", "Paper...", "Scissors...", "Shoot..."]:
+            print(intro_label)
+            time.sleep(0.75)
 
-        print(f"Computer chose: {self.get_option_label(random_choice)}")
+        print(f"Computer chose: {self.__get_option_label(random_choice)}")
 
         if player_choice == random_choice:
             print("It's a draw!")
             return
 
-        if self.is_win(player_choice, random_choice):
+        if self.__is_win(player_choice, random_choice):
             print("Player won!")
             return
 
