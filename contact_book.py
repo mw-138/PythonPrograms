@@ -56,13 +56,13 @@ class ContactBook:
     def __list_contacts(self):
         contact_index = 0
         for contact in self.contacts:
-            print("="*30)
+            print("=" * 30)
             print(f""
                   f"Index: {contact_index}\n"
                   f"Name: {contact.first_name} {contact.last_name}\n"
                   f"Phone Number: {contact.phone_number}"
                   f"")
-            print("="*30)
+            print("=" * 30)
             contact_index += 1
 
     def start(self):
