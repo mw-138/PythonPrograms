@@ -6,8 +6,7 @@ from text_adventure_game.inventory_item import InventoryItem
 
 
 class InventorySystem:
-    def __init__(self, max_slots):
-        self.max_slots = max_slots
+    def __init__(self):
         self.slots = []
 
     def does_item_exist(self, identifier):

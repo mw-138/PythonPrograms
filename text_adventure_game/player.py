@@ -7,7 +7,7 @@ class Player:
         self.max_health = starting_health
         self.current_health = self.max_health
         self.gold = 0
-        self.inventory = InventorySystem(30)
+        self.inventory = InventorySystem()
         self.levelling = LevellingSystem(100, 0.07, 2)
 
     def has_enough_gold(self, amount):
