@@ -1,4 +1,5 @@
-from inventory_system import InventorySystem
+from text_adventure_game.inventory_system import InventorySystem
+from text_adventure_game.levelling_system import LevellingSystem
 
 
 class Player:
@@ -7,6 +8,7 @@ class Player:
         self.current_health = self.max_health
         self.gold = 0
         self.inventory = InventorySystem(30)
+        self.levelling = LevellingSystem(100, 0.07, 2)
 
     def has_enough_gold(self, amount):
         return self.gold >= amount

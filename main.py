@@ -8,7 +8,7 @@ from rock_paper_scissors import RockPaperScissors
 from contact_book import ContactBook
 from request_testing import TestRequest
 from qr_code_generator import QRCodeGenerator
-from text_adventure_game.text_adventure_game import TextAdventureGame
+from text_adventure_game.main import TextAdventureGame
 
 
 # Quiz([

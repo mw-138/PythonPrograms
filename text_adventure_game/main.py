@@ -2,8 +2,9 @@ import random
 import time
 import helpers
 from enum import Enum
-from player import Player
-from enemy import Enemy
+from text_adventure_game.player import Player
+from text_adventure_game.enemy import Enemy
+from text_adventure_game.inventory_item import ItemRarity, WeaponInventoryItem
 
 
 class AdventureScenario(Enum):
@@ -19,8 +20,19 @@ class TextAdventureGame:
     def __print_player_info(self):
         helpers.print_string_section('-', [
             f"HP: {self.player.current_health}/{self.player.max_health}",
-            f"Gold: {self.player.gold}"
+            f"Gold: {self.player.gold}",
+            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()}"
         ])
+
+    def __print_player_inventory(self):
+        formatted_inventory = ["Inventory:\n"]
+        for inv_slot in self.player.inventory.slots:
+            item = self.player.inventory.get_item(inv_slot.identifier)
+            if type(item) == WeaponInventoryItem:
+                formatted_inventory.append(f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label} (DMG: {item.damage})")
+            else:
+                formatted_inventory.append(f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label}")
+        helpers.print_string_section('-', formatted_inventory)
 
     def __do_return_countdown(self, timer):
         for _ in range(timer, 0, -1):
@@ -59,13 +71,14 @@ class TextAdventureGame:
                     break
 
             if enemy.is_dead():
+                gold_reward = helpers.random_inclusive(3, 9)
                 helpers.print_string_section('-', [
                     "Enemy died!",
-                    "Giving player rewards from enemy death..."
+                    f"+{gold_reward} gold"
                 ])
+                self.player.give_gold(gold_reward)
         elif scenario == AdventureScenario.FOUND_ITEM:
-            # TODO: Add functionality
-            print("Found item")
+            self.player.inventory.add_random_item(1)
 
         self.__do_return_countdown(3)
 
@@ -85,33 +98,34 @@ class TextAdventureGame:
     def __get_random_adventure_scenario(self):
         return random.choice(list(AdventureScenario))
 
-    # def start(self):
-    #     # self.player.damage(self.player.max_health)
-    #     # self.player.inventory.does_item_exist("test")
-    #     while True:
-    #         if self.player.is_dead():
-    #             helpers.print_string_section('-', [
-    #                 "What do you want to do?",
-    #                 f"[0] Heal for {self.revive_cost} gold",
-    #             ])
-    #             player_input = int(input("Enter number: "))
-    #             if player_input == 0:
-    #                 if self.player.has_enough_gold(self.revive_cost):
-    #                     self.player.revive()
-    #                 else:
-    #                     print("You don't have enough gold to revive. Game over.")
-    #                     break
-    #         else:
-    #             helpers.print_string_section('-', [
-    #                 "What do you want to do?",
-    #                 "[0] Adventure",
-    #                 "[1] Vendor",
-    #                 "[2] View Player Info",
-    #             ])
-    #             player_input = int(input("Enter number: "))
-    #             if player_input == 0:
-    #                 self.__go_on_adventure()
-    #             elif player_input == 1:
-    #                 self.__visit_vendor()
-    #             elif player_input == 2:
-    #                 self.__print_player_info()
+    def start(self):
+        while True:
+            if self.player.is_dead():
+                helpers.print_string_section('-', [
+                    "What do you want to do?",
+                    f"[0] Heal for {self.revive_cost} gold",
+                ])
+                player_input = int(input("Enter number: "))
+                if player_input == 0:
+                    if self.player.has_enough_gold(self.revive_cost):
+                        self.player.revive()
+                    else:
+                        print("You don't have enough gold to revive. Game over.")
+                        break
+            else:
+                helpers.print_string_section('-', [
+                    "What do you want to do?",
+                    "[0] Adventure",
+                    "[1] Vendor",
+                    "[2] View Stats",
+                    "[3] View Inventory",
+                ])
+                player_input = int(input("Enter number: "))
+                if player_input == 0:
+                    self.__go_on_adventure()
+                elif player_input == 1:
+                    self.__visit_vendor()
+                elif player_input == 2:
+                    self.__print_player_info()
+                elif player_input == 3:
+                    self.__print_player_inventory()
