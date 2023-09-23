@@ -8,6 +8,7 @@ import rock_paper_scissors
 import contact_book
 import request_testing
 import qr_code_generator
+import text_adventure_game
 
 
 # quiz.Quiz([
@@ -32,3 +33,5 @@ import qr_code_generator
 # request_testing.TestRequest().start()
 
 # qr_code_generator.QRCodeGenerator("google.com").generate()
+
+text_adventure_game.TextAdventureGame().start()
