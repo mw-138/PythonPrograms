@@ -4,7 +4,8 @@ Created in PyCharm
 ## Includes:
 - [Blackjack](blackjack.py)
 - [Hangman](hangman.py)
-- [Number guesser](number_guesser.py)
-- [Password generator](password_generator.py)
+- [Number Guesser](number_guesser.py)
+- [Password Generator](password_generator.py)
 - [Quiz](quiz.py)
 - [Timer](timer.py)
+- [Rock Paper Scissors](rock_paper_scissors.py)
