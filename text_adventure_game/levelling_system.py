@@ -7,13 +7,14 @@ class LevellingSystem:
         self.constant = constant
         self.power = power
         self.experience = 0
+        self.starting_level = 1
 
     def get_current_level(self):
-        return 1 + math.floor(self.constant * math.sqrt(self.experience))
+        return self.starting_level + math.floor(self.constant * math.sqrt(self.experience))
 
     def get_previous_level(self):
         level = self.get_current_level()
-        return 0 if level <= 0 else level - 1
+        return self.starting_level if level <= self.starting_level else level - 1
 
     def get_next_level(self):
         return self.max_level if self.has_reached_max_level() else self.get_current_level() + 1
