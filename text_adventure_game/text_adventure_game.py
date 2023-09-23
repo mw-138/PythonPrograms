@@ -2,61 +2,13 @@ import random
 import time
 import helpers
 import enum
-
-
-class Player:
-    def __init__(self, starting_health):
-        self.max_health = starting_health
-        self.current_health = self.max_health
-        self.gold = 0
-
-    def has_enough_gold(self, amount):
-        return self.gold >= amount
-
-    def give_gold(self, amount):
-        self.gold += amount
-
-    def remove_gold(self, amount):
-        if not self.has_enough_gold(amount):
-            return
-        self.gold -= amount
-
-    def damage(self, amount):
-        self.current_health -= amount
-        if self.current_health <= 0:
-            self.current_health = 0
-
-    def heal(self, amount):
-        self.current_health += amount
-        if self.current_health > self.max_health:
-            self.current_health = self.max_health
-
-    def is_dead(self):
-        return self.current_health <= 0
-
-    def revive(self):
-        if not self.is_dead():
-            return
-        self.current_health = self.max_health
+from player import Player
+from enemy import Enemy
 
 
 class AdventureScenario(enum.Enum):
     FOUND_ENEMY = 1
     FOUND_ITEM = 2
-
-
-class Enemy:
-    def __init__(self, health, damage):
-        self.health = health
-        self.damage = damage
-
-    def is_dead(self):
-        return self.health <= 0
-
-    def deal_damage(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.health = 0
 
 
 class TextAdventureGame:
@@ -112,6 +64,7 @@ class TextAdventureGame:
                     "Giving player rewards from enemy death..."
                 ])
         elif scenario == AdventureScenario.FOUND_ITEM:
+            # TODO: Add functionality
             print("Found item")
 
         self.__do_return_countdown(3)
