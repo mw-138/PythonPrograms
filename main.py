@@ -5,6 +5,7 @@ import password_generator
 import hangman
 import timer
 import rock_paper_scissors
+import contact_book
 
 
 # quiz.Quiz([
@@ -23,3 +24,5 @@ import rock_paper_scissors
 # timer.Timer(1, 2, 0).start()
 
 # rock_paper_scissors.RockPaperScissors().start()
+
+# contact_book.ContactBook().start()
