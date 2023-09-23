@@ -6,6 +6,7 @@ import hangman
 import timer
 import rock_paper_scissors
 import contact_book
+import request_testing
 
 
 # quiz.Quiz([
@@ -26,3 +27,5 @@ import contact_book
 # rock_paper_scissors.RockPaperScissors().start()
 
 # contact_book.ContactBook().start()
+
+# request_testing.TestRequest().start()
