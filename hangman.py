@@ -10,7 +10,7 @@ class Hangman:
         print("Start guessing...")
         time.sleep(0.5)
 
-        word = self.words[random.randrange(0, len(self.words))]
+        word = random.choice(self.words)
         guesses = ""
         turns = 10
 
