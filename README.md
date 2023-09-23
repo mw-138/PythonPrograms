@@ -11,3 +11,4 @@ Created in PyCharm
 - [Rock Paper Scissors](rock_paper_scissors.py)
 - [Contact Book](contact_book.py)
 - [Request Testing](request_testing.py)
+- [QR Code Generator](qr_code_generator.py)

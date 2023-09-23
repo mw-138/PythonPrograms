@@ -7,6 +7,7 @@ import timer
 import rock_paper_scissors
 import contact_book
 import request_testing
+import qr_code_generator
 
 
 # quiz.Quiz([
@@ -28,4 +29,6 @@ import request_testing
 
 # contact_book.ContactBook().start()
 
-request_testing.TestRequest().start()
+# request_testing.TestRequest().start()
+
+# qr_code_generator.QRCodeGenerator("google.com").generate()
