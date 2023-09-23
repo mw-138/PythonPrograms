@@ -28,4 +28,4 @@ import request_testing
 
 # contact_book.ContactBook().start()
 
-# request_testing.TestRequest().start()
+request_testing.TestRequest().start()
