@@ -10,7 +10,14 @@ class ItemRarity(Enum):
 
 
 class InventoryItem:
-    def __init__(self, label, max_stack, rarity):
+    def __init__(self, label, max_stack, rarity, sell_price):
         self.label = label
         self.max_stack = max_stack
         self.rarity = rarity
+        self.sell_price = sell_price
+
+
+class WeaponInventoryItem(InventoryItem):
+    def __init__(self, label, max_stack, rarity, sell_price, damage):
+        super().__init__(label, max_stack, rarity, sell_price)
+        self.damage = damage

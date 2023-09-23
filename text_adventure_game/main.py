@@ -1,12 +1,12 @@
 import random
 import time
 import helpers
-import enum
+from enum import Enum
 from player import Player
 from enemy import Enemy
 
 
-class AdventureScenario(enum.Enum):
+class AdventureScenario(Enum):
     FOUND_ENEMY = 1
     FOUND_ITEM = 2
 
@@ -85,32 +85,33 @@ class TextAdventureGame:
     def __get_random_adventure_scenario(self):
         return random.choice(list(AdventureScenario))
 
-    def start(self):
-        # self.player.damage(self.player.max_health)
-        while True:
-            if self.player.is_dead():
-                helpers.print_string_section('-', [
-                    "What do you want to do?",
-                    f"[0] Heal for {self.revive_cost} gold",
-                ])
-                player_input = int(input("Enter number: "))
-                if player_input == 0:
-                    if self.player.has_enough_gold(self.revive_cost):
-                        self.player.revive()
-                    else:
-                        print("You don't have enough gold to revive. Game over.")
-                        break
-            else:
-                helpers.print_string_section('-', [
-                    "What do you want to do?",
-                    "[0] Adventure",
-                    "[1] Vendor",
-                    "[2] View Player Info",
-                ])
-                player_input = int(input("Enter number: "))
-                if player_input == 0:
-                    self.__go_on_adventure()
-                elif player_input == 1:
-                    self.__visit_vendor()
-                elif player_input == 2:
-                    self.__print_player_info()
+    # def start(self):
+    #     # self.player.damage(self.player.max_health)
+    #     # self.player.inventory.does_item_exist("test")
+    #     while True:
+    #         if self.player.is_dead():
+    #             helpers.print_string_section('-', [
+    #                 "What do you want to do?",
+    #                 f"[0] Heal for {self.revive_cost} gold",
+    #             ])
+    #             player_input = int(input("Enter number: "))
+    #             if player_input == 0:
+    #                 if self.player.has_enough_gold(self.revive_cost):
+    #                     self.player.revive()
+    #                 else:
+    #                     print("You don't have enough gold to revive. Game over.")
+    #                     break
+    #         else:
+    #             helpers.print_string_section('-', [
+    #                 "What do you want to do?",
+    #                 "[0] Adventure",
+    #                 "[1] Vendor",
+    #                 "[2] View Player Info",
+    #             ])
+    #             player_input = int(input("Enter number: "))
+    #             if player_input == 0:
+    #                 self.__go_on_adventure()
+    #             elif player_input == 1:
+    #                 self.__visit_vendor()
+    #             elif player_input == 2:
+    #                 self.__print_player_info()

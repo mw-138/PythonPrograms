@@ -1,5 +1,8 @@
-from inventory_item import InventoryItem, ItemRarity
+from text_adventure_game.inventory_item import InventoryItem, ItemRarity, WeaponInventoryItem
+
+__max_item_stack = 1000
 
 item_list = {
-    "longsword": InventoryItem("Longsword", 1, ItemRarity.Legendary)
+    "old_boot": InventoryItem("Old Boot", __max_item_stack, ItemRarity.Common, 1),
+    "longsword": WeaponInventoryItem("Longsword", 1, ItemRarity.Legendary, 1000, 50)
 }
