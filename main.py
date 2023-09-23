@@ -1,37 +1,37 @@
-import quiz
-import blackjack
-import number_guesser
-import password_generator
-import hangman
-import timer
-import rock_paper_scissors
-import contact_book
-import request_testing
-import qr_code_generator
-import text_adventure_game
+from quiz import Quiz, Question
+from blackjack import Blackjack
+from number_guesser import NumberGuesser
+from password_generator import PasswordGenerator
+from hangman import Hangman
+from timer import Timer
+from rock_paper_scissors import RockPaperScissors
+from contact_book import ContactBook
+from request_testing import TestRequest
+from qr_code_generator import QRCodeGenerator
+from text_adventure_game import TextAdventureGame
 
 
-# quiz.Quiz([
-#     quiz.Question("What is 2+2?", "4"),
-#     quiz.Question("What is the capital of England?", "London")
+# Quiz([
+#     Question("What is 2+2?", "4"),
+#     Question("What is the capital of England?", "London")
 # ]).start()
 
-# blackjack.Blackjack().start()
+# Blackjack().start()
 
-# number_guesser.NumberGuesser(100).start()
+# NumberGuesser(100).start()
 
-# password_generator.PasswordGenerator(100).generate()
+# PasswordGenerator(100).generate()
 
-# hangman.Hangman(["secret", "hello", "world"]).start()
+# Hangman(["secret", "hello", "world"]).start()
 
-# timer.Timer(1, 2, 0).start()
+# Timer(1, 2, 0).start()
 
-# rock_paper_scissors.RockPaperScissors().start()
+# RockPaperScissors().start()
 
-# contact_book.ContactBook().start()
+# ContactBook().start()
 
-# request_testing.TestRequest().start()
+# TestRequest().start()
 
-# qr_code_generator.QRCodeGenerator("google.com").generate()
+# QRCodeGenerator("https://www.google.co.uk").generate()
 
-text_adventure_game.TextAdventureGame().start()
+TextAdventureGame().start()
