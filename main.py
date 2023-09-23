@@ -4,6 +4,7 @@ import number_guesser
 import password_generator
 import hangman
 import timer
+import rock_paper_scissors
 
 
 # quiz.Quiz([
@@ -20,3 +21,5 @@ import timer
 # hangman.Hangman(["secret", "hello", "world"]).start()
 
 # timer.Timer(1, 2, 0).start()
+
+# rock_paper_scissors.RockPaperScissors().start()
