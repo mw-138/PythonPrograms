@@ -12,7 +12,7 @@ class Enemy(DamageableObject):
     @staticmethod
     def generate_random(player_level):
         player_level += 1
-        random_level = helpers.random_inclusive(1, player_level + 1)
+        random_level = helpers.random_inclusive(1, player_level)
         random_max_health = math.ceil(math.pow(random_level / 0.08, 1.6))
         random_damage = math.ceil(math.pow(random_level / 0.02, 0.5))
         return Enemy(random_max_health, random_damage, random_level)
