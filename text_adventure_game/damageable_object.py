@@ -25,4 +25,4 @@ class DamageableObject:
         self.current_health = self.max_health
 
     def get_health_progress_bar(self):
-        return helpers.progress_bar(self.current_health, self.max_health, 10)
+        return helpers.progress_bar(self.current_health, self.max_health)

@@ -19,7 +19,7 @@ def random_inclusive(start, stop):
     return random.randrange(start, stop + 1)
 
 
-def progress_bar(current_value, max_value, bar_count):
+def progress_bar(current_value, max_value, bar_count=10):
     progress = (current_value / max_value) * bar_count
     retval = ""
     retval += "█" * int(progress)
