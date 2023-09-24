@@ -41,7 +41,8 @@ class LevellingSystem:
         self.experience += amount
         level_diff = self.get_current_level() - current_level
         if level_diff > 0:
-            self.level_up_event.on_change(level_diff)
+            for lvl in range(level_diff):
+                self.level_up_event.on_change(current_level + (lvl + 1))
 
     def remove_experience(self, amount):
         if self.experience <= 0:
