@@ -21,7 +21,7 @@ class TextAdventureGame:
         helpers.print_string_section('-', [
             f"HP: {self.player.current_health}/{self.player.max_health} {self.player.get_health_progress_bar()}",
             f"Gold: {self.player.gold}",
-            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()} {self.player.levelling.get_experience_progress_bar()}"
+            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()} -> {self.player.levelling.get_experience_progress()}% {self.player.levelling.get_experience_progress_bar()}"
         ])
 
     def __print_player_inventory(self):
