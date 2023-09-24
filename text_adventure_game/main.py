@@ -114,8 +114,6 @@ class TextAdventureGame:
             helpers.print_string_section('-', ["You don't need to heal!"])
 
     def start(self):
-        # enemy = self.__generate_random_enemy()
-        # print(f"{enemy.current_health}/{enemy.max_health} {enemy.damage} {enemy.level}")
         while True:
             if self.player.is_dead():
                 helpers.print_string_section('-', [
