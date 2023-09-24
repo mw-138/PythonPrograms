@@ -45,7 +45,7 @@ class TextAdventureGame:
             time.sleep(1)
 
     def __generate_random_enemy(self):
-        return Enemy(helpers.random_inclusive(50, 100), helpers.random_inclusive(1, 10))
+        return Enemy.generate_random(self.player.levelling.get_current_level())
 
     def __go_on_adventure(self):
         helpers.print_string_section('-', ["Adventuring..."])
