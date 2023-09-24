@@ -58,12 +58,7 @@ class TextAdventureGame:
             player_turn = True
             while not enemy.is_dead():
                 player_damage = helpers.random_inclusive(10, 20)
-
-                if player_turn:
-                    enemy.deal_damage(player_damage)
-                else:
-                    self.player.deal_damage(enemy.damage)
-
+                enemy.deal_damage(player_damage) if player_turn else self.player.deal_damage(enemy.damage)
                 helpers.print_string_section('-', [
                     f"Player dealt {player_damage:,} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage:,} damage to player",
                     f"Player: {self.player.current_health:,}/{self.player.max_health:,} {self.player.get_health_progress_bar()}",
@@ -119,6 +114,8 @@ class TextAdventureGame:
             helpers.print_string_section('-', ["You don't need to heal!"])
 
     def start(self):
+        # enemy = self.__generate_random_enemy()
+        # print(f"{enemy.current_health}/{enemy.max_health} {enemy.damage} {enemy.level}")
         while True:
             if self.player.is_dead():
                 helpers.print_string_section('-', [
