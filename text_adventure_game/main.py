@@ -18,10 +18,14 @@ class TextAdventureGame:
         self.revive_cost = 100
 
     def __print_player_info(self):
+        ply = self.player
+        lvl = ply.levelling
         helpers.print_string_section('-', [
-            f"HP: {self.player.current_health}/{self.player.max_health} {self.player.get_health_progress_bar()}",
-            f"Gold: {self.player.gold}",
-            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()} -> {self.player.levelling.get_experience_progress()}% {self.player.levelling.get_experience_progress_bar()}"
+            f"HP: {ply.current_health}/{ply.max_health} {ply.get_health_progress_bar()}",
+            f"Gold: {ply.gold}",
+            f"Level: {lvl.get_current_level()} -> "
+            f"{lvl.experience}/{lvl.get_experience_for_next_level()} -> "
+            f"{lvl.get_experience_progress()}% {lvl.get_experience_progress_bar()}"
         ])
 
     def __print_player_inventory(self):
