@@ -1,4 +1,5 @@
 import random
+import helpers
 
 from text_adventure_game.item_list import item_list
 from text_adventure_game.inventory_slot import InventorySlot
@@ -8,6 +9,7 @@ from text_adventure_game.inventory_item import InventoryItem
 class InventorySystem:
     def __init__(self):
         self.slots = []
+        self.luck_multiplier = 1
 
     def does_item_exist(self, identifier):
         return identifier in item_list
@@ -17,8 +19,15 @@ class InventorySystem:
             return None
         return item_list[identifier]
 
-    def get_random_item_identifier(self):
-        return random.choice(list(item_list.keys()))
+    def get_random_item_identifier(self, amount=1):
+        population = []
+        weights = []
+        for key in item_list:
+            item = item_list[key]
+            population.append(key)
+            weights.append(item.chance * self.luck_multiplier)
+        choices = random.choices(population=population, weights=weights, k=amount)
+        return choices[0] if amount == 1 else choices
 
     def __get_slot_for_item(self, identifier) -> InventorySlot | None:
         for slot in self.slots:

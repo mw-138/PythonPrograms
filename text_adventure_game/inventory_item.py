@@ -10,20 +10,21 @@ class ItemRarity(Enum):
 
 
 class InventoryItem:
-    def __init__(self, label, max_stack, rarity, sell_price):
+    def __init__(self, label, max_stack, rarity, sell_price, chance):
         self.label = label
         self.max_stack = max_stack
         self.rarity = rarity
         self.sell_price = sell_price
+        self.chance = chance
 
 
 class WeaponInventoryItem(InventoryItem):
-    def __init__(self, label, max_stack, rarity, sell_price, damage):
-        super().__init__(label, max_stack, rarity, sell_price)
+    def __init__(self, label, max_stack, rarity, sell_price, chance, damage):
+        super().__init__(label, max_stack, rarity, sell_price, chance)
         self.damage = damage
 
 
 class ArmorInventoryItem(InventoryItem):
-    def __init__(self, label, max_stack, rarity, sell_price, protection):
-        super().__init__(label, max_stack, rarity, sell_price)
+    def __init__(self, label, max_stack, rarity, sell_price, chance, protection):
+        super().__init__(label, max_stack, rarity, sell_price, chance)
         self.protection = protection
