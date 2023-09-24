@@ -21,10 +21,10 @@ class TextAdventureGame:
         ply = self.player
         lvl = ply.levelling
         helpers.print_string_section('-', [
-            f"HP: {ply.current_health}/{ply.max_health} {ply.get_health_progress_bar()}",
-            f"Gold: {ply.gold}",
-            f"Level: {lvl.get_current_level()} -> "
-            f"{lvl.experience}/{lvl.get_experience_for_next_level()} -> "
+            f"HP: {ply.current_health:,}/{ply.max_health:,} {ply.get_health_progress_bar()}",
+            f"Gold: {ply.gold:,}",
+            f"Level: {lvl.get_current_level():,} -> "
+            f"{lvl.experience:,}/{lvl.get_experience_for_next_level():,} -> "
             f"{lvl.get_experience_progress()}% {lvl.get_experience_progress_bar()}"
         ])
 
@@ -32,9 +32,9 @@ class TextAdventureGame:
         formatted_inventory = [f"Inventory ({len(self.player.inventory.slots)}):\n"]
         for inv_slot in self.player.inventory.slots:
             item = self.player.inventory.get_item(inv_slot.identifier)
-            base_str = f"x{inv_slot.count} {ItemRarity(item.rarity.value).name} {item.label} (Value: {item.sell_price * inv_slot.count})"
+            base_str = f"x{inv_slot.count:,} {ItemRarity(item.rarity.value).name} {item.label} (Value: {item.sell_price * inv_slot.count})"
             if type(item) == WeaponInventoryItem:
-                formatted_inventory.append(f"{base_str} (DMG: {item.damage})")
+                formatted_inventory.append(f"{base_str} (DMG: {item.damage:,})")
             else:
                 formatted_inventory.append(base_str)
         helpers.print_string_section('-', formatted_inventory)
@@ -65,11 +65,9 @@ class TextAdventureGame:
                     self.player.deal_damage(enemy.damage)
 
                 helpers.print_string_section('-', [
-                    f"Player dealt {player_damage} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage} damage to player",
-                    f"Player: {self.player.current_health}/{self.player.max_health}",
-                    self.player.get_health_progress_bar(),
-                    f"Enemy: {enemy.current_health}/{enemy.max_health}",
-                    enemy.get_health_progress_bar()
+                    f"Player dealt {player_damage:,} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage:,} damage to player",
+                    f"Player: {self.player.current_health:,}/{self.player.max_health:,} {self.player.get_health_progress_bar()}",
+                    f"Enemy: {enemy.current_health:,}/{enemy.max_health:,} {enemy.get_health_progress_bar()}",
                 ])
 
                 time.sleep(1)
@@ -84,8 +82,8 @@ class TextAdventureGame:
                 exp_reward = helpers.random_inclusive(1, 100)
                 helpers.print_string_section('-', [
                     "Enemy died!",
-                    f"+{gold_reward} gold",
-                    f"+{exp_reward} experience"
+                    f"+{gold_reward:,} gold",
+                    f"+{exp_reward:,} experience"
                 ])
                 self.player.give_gold(gold_reward)
                 self.player.levelling.give_experience(exp_reward)
@@ -114,6 +112,7 @@ class TextAdventureGame:
         if self.player.current_health < self.player.max_health:
             if self.player.has_enough_gold(self.player.get_revive_cost()):
                 self.player.revive()
+                self.player.remove_gold(self.player.get_revive_cost())
             else:
                 helpers.print_string_section('-', ["You don't have enough gold to heal!"])
         else:
@@ -124,7 +123,7 @@ class TextAdventureGame:
             if self.player.is_dead():
                 helpers.print_string_section('-', [
                     "What do you want to do?",
-                    f"[0] Heal for {self.revive_cost} gold",
+                    f"[0] Heal for {self.revive_cost:,} gold",
                 ])
                 player_input = int(input("Enter number: "))
                 if player_input == 0:
@@ -140,7 +139,7 @@ class TextAdventureGame:
                     "[1] Vendor",
                     "[2] View Stats",
                     "[3] View Inventory",
-                    f"[4] Heal for {self.player.get_revive_cost()} gold"
+                    f"[4] Heal for {self.player.get_revive_cost():,} gold"
                 ])
                 player_input = int(input("Enter number: "))
                 if player_input == 0:

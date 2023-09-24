@@ -28,10 +28,10 @@ class Player(DamageableObject):
             return
         self.gold -= amount
 
-    def __on_level_up(self, times_levelled_up):
-        gold_reward = times_levelled_up * 50
+    def __on_level_up(self, new_level):
+        gold_reward = new_level * 50
         helpers.print_string_section('-', [
-            f"Player levelled up {times_levelled_up} times!",
+            f"Player is now level {new_level}!",
             f"+{gold_reward} gold"
         ])
         self.give_gold(gold_reward)

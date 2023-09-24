@@ -25,3 +25,7 @@ def progress_bar(current_value, max_value, bar_count=10):
     retval += "█" * int(progress)
     retval += "▒" * int(bar_count - progress)
     return retval
+
+
+# def currency_format(value):
+#
