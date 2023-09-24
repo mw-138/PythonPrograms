@@ -9,6 +9,7 @@ from contact_book import ContactBook
 from request_testing import TestRequest
 from qr_code_generator import QRCodeGenerator
 from text_adventure_game.main import TextAdventureGame
+from football_league_table import FootballLeagueTable
 
 
 # Quiz([
@@ -34,4 +35,6 @@ from text_adventure_game.main import TextAdventureGame
 
 # QRCodeGenerator("https://www.google.co.uk").generate()
 
-TextAdventureGame().start()
+# TextAdventureGame().start()
+
+FootballLeagueTable().start()
