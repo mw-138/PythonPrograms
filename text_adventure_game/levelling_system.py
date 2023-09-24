@@ -1,4 +1,6 @@
 import math
+from events import Events
+import helpers
 
 
 class LevellingSystem:
@@ -7,7 +9,8 @@ class LevellingSystem:
         self.constant = constant
         self.power = power
         self.experience = 0
-        self.starting_level = 1
+        self.starting_level = 0
+        self.level_up_event = Events()
 
     def get_current_level(self):
         return self.starting_level + math.floor(self.constant * math.sqrt(self.experience))
@@ -34,7 +37,11 @@ class LevellingSystem:
     def give_experience(self, amount):
         if self.has_reached_max_level():
             return
+        current_level = self.get_current_level()
         self.experience += amount
+        level_diff = self.get_current_level() - current_level
+        if level_diff > 0:
+            self.level_up_event.on_change(level_diff)
 
     def remove_experience(self, amount):
         if self.experience <= 0:
