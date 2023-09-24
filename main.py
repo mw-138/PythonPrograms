@@ -35,6 +35,6 @@ from football_league_table import FootballLeagueTable
 
 # QRCodeGenerator("https://www.google.co.uk").generate()
 
-# TextAdventureGame().start()
+TextAdventureGame().start()
 
-FootballLeagueTable().start()
+# FootballLeagueTable().start()
