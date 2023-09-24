@@ -1,12 +1,7 @@
-class Enemy:
-    def __init__(self, health, damage):
-        self.health = health
+from text_adventure_game.damageable_object import DamageableObject
+
+
+class Enemy(DamageableObject):
+    def __init__(self, max_health, damage):
+        super().__init__(max_health)
         self.damage = damage
-
-    def is_dead(self):
-        return self.health <= 0
-
-    def deal_damage(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.health = 0
