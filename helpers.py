@@ -2,8 +2,12 @@ import os
 import random
 
 
+def get_list_max_length(strings):
+    return len(max(strings, key=len))
+
+
 def print_string_section(char, strings):
-    max_width = len(max(strings, key=len))
+    max_width = get_list_max_length(strings)
     to_print = char * max_width
     print(to_print)
     for entry in strings:

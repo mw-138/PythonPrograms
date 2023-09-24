@@ -51,10 +51,11 @@ class Fixture:
 
 
 class League:
-    def __init__(self, label, teams):
+    def __init__(self, label, teams, team_dividers):
         self.label = label
         self.teams = teams
         self.fixtures = self.__generate_fixtures()
+        self.team_dividers = team_dividers
 
     def __generate_fixtures(self):
         fixtures = []
@@ -86,6 +87,7 @@ class League:
     def print_league(self):
         to_print = [f"{self.label}\n"]
         pos = 1
+
         for team in self.teams:
             to_print.append(
                 f"{pos} | "
@@ -100,6 +102,10 @@ class League:
                 f"PTS: {team.get_points()}"
             )
             pos += 1
+
+        for divider in self.team_dividers:
+            to_print.insert(divider + 1, "-" * helpers.get_list_max_length(to_print))
+
         helpers.print_string_section('-', to_print)
 
 
@@ -134,4 +140,4 @@ premier_league = League("Premier League", [
     Team("Tottenham Hotspur"),
     Team("West Ham United"),
     Team("Wolverhampton Wanderers")
-])
+], [1, 5, 7, 20])
