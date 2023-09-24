@@ -21,3 +21,9 @@ class WeaponInventoryItem(InventoryItem):
     def __init__(self, label, max_stack, rarity, sell_price, damage):
         super().__init__(label, max_stack, rarity, sell_price)
         self.damage = damage
+
+
+class ArmorInventoryItem(InventoryItem):
+    def __init__(self, label, max_stack, rarity, sell_price, protection):
+        super().__init__(label, max_stack, rarity, sell_price)
+        self.protection = protection

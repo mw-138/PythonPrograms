@@ -54,15 +54,19 @@ class TextAdventureGame:
             player_turn = True
             while not enemy.is_dead():
                 player_damage = helpers.random_inclusive(10, 20)
-                print(
-                    f"Player dealt {player_damage} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage} damage to player")
 
                 if player_turn:
                     enemy.deal_damage(player_damage)
                 else:
-                    self.player.damage(enemy.damage)
+                    self.player.deal_damage(enemy.damage)
 
-                print(f"Player: {self.player.current_health}/{self.player.max_health} | Enemy: {enemy.health}")
+                helpers.print_string_section('-', [
+                    f"Player dealt {player_damage} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage} damage to player",
+                    f"Player: {self.player.current_health}/{self.player.max_health}",
+                    self.player.get_health_progress_bar(),
+                    f"Enemy: {enemy.current_health}/{enemy.max_health}",
+                    enemy.get_health_progress_bar()
+                ])
 
                 time.sleep(1)
                 player_turn = not player_turn
@@ -73,11 +77,14 @@ class TextAdventureGame:
 
             if enemy.is_dead():
                 gold_reward = helpers.random_inclusive(3, 9)
+                exp_reward = helpers.random_inclusive(1, 100)
                 helpers.print_string_section('-', [
                     "Enemy died!",
-                    f"+{gold_reward} gold"
+                    f"+{gold_reward} gold",
+                    f"+{exp_reward} experience"
                 ])
                 self.player.give_gold(gold_reward)
+                self.player.levelling.give_experience(exp_reward)
         elif scenario == AdventureScenario.FOUND_ITEM:
             self.player.inventory.add_random_item(1)
 
