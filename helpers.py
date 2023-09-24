@@ -17,3 +17,11 @@ def clear_terminal():
 
 def random_inclusive(start, stop):
     return random.randrange(start, stop + 1)
+
+
+def progress_bar(current_value, max_value, bar_count):
+    progress = (current_value / max_value) * bar_count
+    retval = ""
+    retval += "█" * int(progress)
+    retval += "▒" * int(bar_count - progress)
+    return retval

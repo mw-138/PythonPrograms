@@ -1,3 +1,6 @@
+import helpers
+
+
 class DamageableObject:
     def __init__(self, max_health):
         self.max_health = max_health
@@ -22,9 +25,4 @@ class DamageableObject:
         self.current_health = self.max_health
 
     def get_health_progress_bar(self):
-        bar_count = 10
-        current_progress = (self.current_health / self.max_health) * bar_count
-        retval = ""
-        retval += "█" * int(current_progress)
-        retval += "▒" * int(bar_count - current_progress)
-        return retval
+        return helpers.progress_bar(self.current_health, self.max_health, 10)

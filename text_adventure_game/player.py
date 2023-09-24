@@ -1,3 +1,5 @@
+import math
+
 from text_adventure_game.inventory_system import InventorySystem
 from text_adventure_game.levelling_system import LevellingSystem
 from text_adventure_game.damageable_object import DamageableObject
@@ -33,3 +35,7 @@ class Player(DamageableObject):
             f"+{gold_reward} gold"
         ])
         self.give_gold(gold_reward)
+
+    def get_revive_cost(self):
+        health_missing = self.max_health - self.current_health
+        return int(math.pow(health_missing, 0.65))

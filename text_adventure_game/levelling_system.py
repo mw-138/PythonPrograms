@@ -53,3 +53,6 @@ class LevellingSystem:
 
     def get_remaining_experience(self):
         return self.get_experience_for_next_level() - self.experience
+
+    def get_experience_progress_bar(self):
+        return helpers.progress_bar(self.experience, self.get_experience_for_next_level(), 10)

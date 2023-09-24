@@ -19,9 +19,9 @@ class TextAdventureGame:
 
     def __print_player_info(self):
         helpers.print_string_section('-', [
-            f"HP: {self.player.current_health}/{self.player.max_health}",
+            f"HP: {self.player.current_health}/{self.player.max_health} {self.player.get_health_progress_bar()}",
             f"Gold: {self.player.gold}",
-            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()}"
+            f"Level: {self.player.levelling.get_current_level()} -> {self.player.levelling.experience}/{self.player.levelling.get_experience_for_next_level()} {self.player.levelling.get_experience_progress_bar()}"
         ])
 
     def __print_player_inventory(self):
@@ -106,6 +106,15 @@ class TextAdventureGame:
     def __get_random_adventure_scenario(self):
         return random.choice(list(AdventureScenario))
 
+    def __heal_player_for_gold(self):
+        if self.player.current_health < self.player.max_health:
+            if self.player.has_enough_gold(self.player.get_revive_cost()):
+                self.player.revive()
+            else:
+                helpers.print_string_section('-', ["You don't have enough gold to heal!"])
+        else:
+            helpers.print_string_section('-', ["You don't need to heal!"])
+
     def start(self):
         while True:
             if self.player.is_dead():
@@ -127,6 +136,7 @@ class TextAdventureGame:
                     "[1] Vendor",
                     "[2] View Stats",
                     "[3] View Inventory",
+                    f"[4] Heal for {self.player.get_revive_cost()} gold"
                 ])
                 player_input = int(input("Enter number: "))
                 if player_input == 0:
@@ -137,3 +147,5 @@ class TextAdventureGame:
                     self.__print_player_info()
                 elif player_input == 3:
                     self.__print_player_inventory()
+                elif player_input == 4:
+                    self.__heal_player_for_gold()
