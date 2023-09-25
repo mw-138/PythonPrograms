@@ -53,7 +53,7 @@ class TextAdventureGame:
         scenario = self.__get_random_adventure_scenario()
 
         if scenario == AdventureScenario.FOUND_ENEMY:
-            print("Found enemy")
+            print("Found enemy!")
             enemy = self.__generate_random_enemy()
             player_turn = True
             while not enemy.is_dead():
@@ -83,6 +83,7 @@ class TextAdventureGame:
                 self.player.give_gold(gold_reward)
                 self.player.levelling.give_experience(exp_reward)
         elif scenario == AdventureScenario.FOUND_ITEM:
+            print("Found item!")
             self.player.inventory.add_random_item(1)
 
         self.__do_return_countdown(3)
