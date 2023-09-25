@@ -38,10 +38,13 @@ class Fixture:
         self.away_team = away_team
 
     def determine_winner(self):
-        winner_population = [self.home_team, self.away_team]
-        winner_weights = [self.home_team.rating, self.away_team.rating]
+        winner_population = [self.home_team, self.away_team, None]
+        draw_rating = round(abs(self.home_team.rating - self.away_team.rating))
+        winner_weights = [self.home_team.rating, self.away_team.rating, draw_rating]
         winner = random.choices(population=winner_population, weights=winner_weights, k=1)[0]
-        did_home_win = self.home_team == winner
+        did_teams_draw = winner is None
+        did_home_win = not did_teams_draw or self.home_team == winner
+        did_away_win = not did_teams_draw or self.away_team == winner
 
         goal_weights = {
             0: 80,
@@ -75,11 +78,18 @@ class Fixture:
             self.away_team.rating -= random.uniform(rating_change_min, rating_change_max)
             self.home_team.clamp_rating()
             self.away_team.clamp_rating()
-        else:
+        elif did_away_win:
             home_score = helpers.random_inclusive(0, max_goals_to_score)
             away_score = home_score + helpers.random_inclusive(0, max_goals_to_score) + 1
             self.home_team.rating -= random.uniform(rating_change_min, rating_change_max)
             self.away_team.rating += random.uniform(rating_change_min, rating_change_max)
+            self.home_team.clamp_rating()
+            self.away_team.clamp_rating()
+        else:
+            home_score = helpers.random_inclusive(0, max_goals_to_score)
+            away_score = home_score
+            self.home_team.rating -= random.uniform(rating_change_min / 2, rating_change_max / 2)
+            self.away_team.rating += random.uniform(rating_change_min / 2, rating_change_max / 2)
             self.home_team.clamp_rating()
             self.away_team.clamp_rating()
 
@@ -91,7 +101,7 @@ class Fixture:
         if did_home_win:
             self.home_team.games_won += 1
             self.away_team.games_lost += 1
-        elif not did_home_win:
+        elif did_away_win:
             self.home_team.games_lost += 1
             self.away_team.games_won += 1
         else:
