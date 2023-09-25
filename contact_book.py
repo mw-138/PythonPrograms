@@ -1,5 +1,5 @@
 import json
-import os
+import helpers
 
 
 class Contact:
@@ -19,9 +19,6 @@ class ContactBook:
         self.contacts = []
         self.file_name = "output/contact_book.txt"
 
-    def __does_file_exist(self):
-        return os.path.exists(self.file_name)
-
     def __encode_contact(self, contact):
         return json.dumps(contact, cls=ContactEncoder)
 
@@ -30,7 +27,7 @@ class ContactBook:
         return Contact(**j)
 
     def __load(self):
-        if self.__does_file_exist():
+        if helpers.does_file_exist(self.file_name):
             with open(self.file_name, "r") as file:
                 for line in file:
                     json_obj = line[:-1]
@@ -40,7 +37,7 @@ class ContactBook:
             self.__save()
 
     def __save(self):
-        file_action = "w" if self.__does_file_exist() else "x"
+        file_action = "w" if helpers.does_file_exist(self.file_name) else "x"
         with open(self.file_name, file_action) as file:
             for contact in self.contacts:
                 file.write(f"{self.__encode_contact(contact)}\n")

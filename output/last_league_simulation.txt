@@ -1,0 +1,26 @@
+Premier League
+
+1 | LIVERPOOL | GP: 38 | W: 26 | D: 0 | L: 12 | GF: 71 | GA: 50 | GD: 21 | PTS: 78 | WIN CHANCE: 75%
+--------------------------------------------------------------------------------------------------------------------
+2 | ARSENAL | GP: 38 | W: 25 | D: 0 | L: 13 | GF: 85 | GA: 51 | GD: 34 | PTS: 75 | WIN CHANCE: 83%
+3 | TOTTENHAM HOTSPUR | GP: 38 | W: 25 | D: 0 | L: 13 | GF: 68 | GA: 56 | GD: 12 | PTS: 75 | WIN CHANCE: 73%
+4 | NOTTINGHAM FOREST | GP: 38 | W: 24 | D: 0 | L: 14 | GF: 88 | GA: 64 | GD: 24 | PTS: 72 | WIN CHANCE: 53%
+--------------------------------------------------------------------------------------------------------------------
+5 | MANCHESTER CITY | GP: 38 | W: 24 | D: 0 | L: 14 | GF: 78 | GA: 57 | GD: 21 | PTS: 72 | WIN CHANCE: 93%
+--------------------------------------------------------------------------------------------------------------------
+6 | MANCHESTER UNITED | GP: 38 | W: 24 | D: 0 | L: 14 | GF: 64 | GA: 48 | GD: 16 | PTS: 72 | WIN CHANCE: 73%
+7 | BRIGHTON AND HOVER ALBION | GP: 38 | W: 23 | D: 0 | L: 15 | GF: 86 | GA: 67 | GD: 19 | PTS: 69 | WIN CHANCE: 71%
+8 | BOURNEMOUTH | GP: 38 | W: 23 | D: 0 | L: 15 | GF: 73 | GA: 61 | GD: 12 | PTS: 69 | WIN CHANCE: 52%
+9 | ASTON VILLA | GP: 38 | W: 22 | D: 0 | L: 16 | GF: 67 | GA: 63 | GD: 4 | PTS: 66 | WIN CHANCE: 62%
+10 | WOLVERHAMPTON WANDERERS | GP: 38 | W: 21 | D: 0 | L: 17 | GF: 67 | GA: 57 | GD: 10 | PTS: 63 | WIN CHANCE: 51%
+11 | NEWCASTLE UNITED | GP: 38 | W: 20 | D: 0 | L: 18 | GF: 66 | GA: 72 | GD: -6 | PTS: 60 | WIN CHANCE: 71%
+12 | CHELSEA | GP: 38 | W: 17 | D: 0 | L: 21 | GF: 57 | GA: 64 | GD: -7 | PTS: 51 | WIN CHANCE: 38%
+13 | WEST HAM UNITED | GP: 38 | W: 17 | D: 0 | L: 21 | GF: 62 | GA: 69 | GD: -7 | PTS: 51 | WIN CHANCE: 59%
+14 | BRENTFORD | GP: 38 | W: 17 | D: 0 | L: 21 | GF: 62 | GA: 79 | GD: -17 | PTS: 51 | WIN CHANCE: 50%
+15 | CRYSTAL PALACE | GP: 38 | W: 14 | D: 0 | L: 24 | GF: 59 | GA: 69 | GD: -10 | PTS: 42 | WIN CHANCE: 37%
+16 | EVERTON | GP: 38 | W: 14 | D: 0 | L: 24 | GF: 48 | GA: 71 | GD: -23 | PTS: 42 | WIN CHANCE: 27%
+17 | BURNLEY | GP: 38 | W: 13 | D: 0 | L: 25 | GF: 61 | GA: 87 | GD: -26 | PTS: 39 | WIN CHANCE: 27%
+--------------------------------------------------------------------------------------------------------------------
+18 | LUTON TOWN | GP: 38 | W: 11 | D: 0 | L: 27 | GF: 57 | GA: 72 | GD: -15 | PTS: 33 | WIN CHANCE: 15%
+19 | SHEFFIELD UNITED | GP: 38 | W: 10 | D: 0 | L: 28 | GF: 37 | GA: 64 | GD: -27 | PTS: 30 | WIN CHANCE: 15%
+20 | FULHAM | GP: 38 | W: 10 | D: 0 | L: 28 | GF: 34 | GA: 69 | GD: -35 | PTS: 30 | WIN CHANCE: 34%

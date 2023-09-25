@@ -57,3 +57,13 @@ def clamp(n, min_value, max_value):
     elif n > max_value:
         return max_value
     return n
+
+
+def does_file_exist(file_name):
+    return os.path.exists(file_name)
+
+
+def save_to_file(file_name, content):
+    file_action = "w" if does_file_exist(file_name) else "x"
+    with open(file_name, file_action) as file:
+        file.write(content)

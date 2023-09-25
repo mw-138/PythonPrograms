@@ -107,6 +107,7 @@ class League:
         self.teams = teams
         self.fixtures = self.__generate_fixtures()
         self.team_dividers = team_dividers
+        self.print_output = ""
 
     def __generate_fixtures(self):
         fixtures = []
@@ -159,6 +160,10 @@ class League:
             to_print.insert(divider + 1, "-" * helpers.get_list_max_length(to_print))
 
         helpers.print_string_section('-', to_print)
+
+        for entry in to_print:
+            self.print_output += f"{entry}\n"
+        helpers.save_to_file("output/last_league_simulation.txt", self.print_output)
 
 
 class FootballLeagueTable:
