@@ -15,6 +15,26 @@ def print_string_section(char, strings):
     print(to_print)
 
 
+def input_section(title, char, items):
+    index = 0
+    strings = [title]
+    indexes = []
+    for item in items:
+        string = f"[{index}] {item['text']}"
+        strings.append(string)
+        indexes.append(index)
+        index += 1
+    print_string_section(char, strings)
+    try:
+        index_input = int(input("Enter number: "))
+        if index_input in indexes and items[index_input]['func']:
+            items[index_input]['func']()
+        else:
+            print("no func")
+    except ValueError:
+        print("Invalid input")
+
+
 def clear_terminal():
     print("\n" * 100)
 

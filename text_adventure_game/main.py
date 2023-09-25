@@ -16,6 +16,7 @@ class TextAdventureGame:
     def __init__(self):
         self.player = Player(100, 10)
         self.revive_cost = 100
+        self.is_game_active = True
 
     def __print_player_info(self):
         ply = self.player
@@ -52,6 +53,7 @@ class TextAdventureGame:
 
         helpers.print_string_section('-', formatted_inventory)
 
+        # TODO: Add input section helper
         helpers.print_string_section('-', [
             "Select action:",
             "[0] Exit",
@@ -171,20 +173,27 @@ class TextAdventureGame:
         self.__do_return_countdown(3)
 
     def __visit_vendor(self):
-        print("Visiting vendor...")
-        time.sleep(1)
+        print("Vendor currently unavailable")
+        self.__do_return_countdown(3)
+        # print("Visiting vendor...")
+        # time.sleep(1)
+        #
+        # items = ["Item 1", "Item 2", "Item 3"]
+        # input_entries = []
+        #
+        # for item in items:
+        #     def buy_item():
+        #         print(f"buying: {item}")
+        #     input_entries.append({"text": item, "func": buy_item})
+        #
+        # helpers.input_section("What would you like to purchase?", '-', input_entries)
 
-        item_index = 0
-        for item in ["Item 1", "Item 2", "Item 3"]:
-            print(f"[{item_index}] {item} - 0 Gold")
-            item_index += 1
-
-        try:
-            player_input = input("What would you like to purchase? (Enter 'x' to leave) ")
-            if player_input.lower() == "x":
-                return
-        except ValueError:
-            print("Invalid input")
+        # try:
+        #     player_input = input("What would you like to purchase? (Enter 'x' to leave) ")
+        #     if player_input.lower() == "x":
+        #         return
+        # except ValueError:
+        #     print("Invalid input")
 
     def __get_random_adventure_scenario(self):
         return random.choice(list(AdventureScenario))
@@ -199,44 +208,25 @@ class TextAdventureGame:
         else:
             helpers.print_string_section('-', ["You don't need to heal!"])
 
+    def __attempt_player_revive(self):
+        if self.player.has_enough_gold(self.revive_cost):
+            self.player.revive()
+        else:
+            print("You don't have enough gold to revive. Game over.")
+            self.is_game_active = False
+
     def start(self):
         # self.player.inventory.randomize_inventory(10)
-        while True:
+        while self.is_game_active:
             if self.player.is_dead():
-                helpers.print_string_section('-', [
-                    "What do you want to do?",
-                    f"[0] Heal for {self.revive_cost:,} gold",
+                helpers.input_section("What do you want to do?", '-', [
+                    {"text": f"Heal for {self.revive_cost:,} gold", "func": self.__attempt_player_revive}
                 ])
-                try:
-                    player_input = int(input("Enter number: "))
-                    if player_input == 0:
-                        if self.player.has_enough_gold(self.revive_cost):
-                            self.player.revive()
-                        else:
-                            print("You don't have enough gold to revive. Game over.")
-                            break
-                except ValueError:
-                    print("Invalid input")
             else:
-                helpers.print_string_section('-', [
-                    "What do you want to do?",
-                    "[0] Adventure",
-                    "[1] Vendor",
-                    "[2] View Stats",
-                    "[3] View Inventory",
-                    f"[4] Heal for {self.player.get_revive_cost():,} gold"
+                helpers.input_section("What do you want to do?", '-', [
+                    {"text": "Adventure", "func": self.__go_on_adventure},
+                    {"text": "Vendor", "func": self.__visit_vendor},
+                    {"text": "View Stats", "func": self.__print_player_info},
+                    {"text": "View Inventory", "func": self.__open_player_inventory},
+                    {"text": f"Heal for {self.player.get_revive_cost():,} gold", "func": self.__heal_player_for_gold},
                 ])
-                try:
-                    player_input = int(input("Enter number: "))
-                    if player_input == 0:
-                        self.__go_on_adventure()
-                    elif player_input == 1:
-                        self.__visit_vendor()
-                    elif player_input == 2:
-                        self.__print_player_info()
-                    elif player_input == 3:
-                        self.__open_player_inventory()
-                    elif player_input == 4:
-                        self.__heal_player_for_gold()
-                except ValueError:
-                    print("Invalid input")
