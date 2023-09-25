@@ -39,7 +39,7 @@ class Fixture:
 
     def determine_winner(self):
         winner_population = [self.home_team, self.away_team]
-        winner_weights = (self.home_team.rating, self.away_team.rating)
+        winner_weights = [self.home_team.rating, self.away_team.rating]
         winner = random.choices(population=winner_population, weights=winner_weights, k=1)[0]
         did_home_win = self.home_team == winner
 
