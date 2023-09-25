@@ -49,3 +49,11 @@ def progress_bar(current_value, max_value, bar_count=10):
     retval += "█" * int(progress)
     retval += "▒" * int(bar_count - progress)
     return retval
+
+
+def clamp(n, min_value, max_value):
+    if n < min_value:
+        return min_value
+    elif n > max_value:
+        return max_value
+    return n
