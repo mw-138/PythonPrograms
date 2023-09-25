@@ -11,8 +11,21 @@ class InventorySystem:
         self.slots = []
         self.luck_multiplier = 1
 
+    def is_index_valid(self, index):
+        return index >= 0 or index <= len(self.slots) - 1
+
     def does_item_exist(self, identifier):
         return identifier in item_list
+
+    def get_item_total(self, identifier):
+        total = 0
+        for slot in self.slots:
+            if slot.identifier == identifier:
+                total += slot.count
+        return total
+
+    def has_enough_of_item(self, identifier, amount):
+        return self.get_item_total(identifier) >= amount
 
     def get_item(self, identifier) -> InventoryItem | None:
         if not self.does_item_exist(identifier):
@@ -48,7 +61,7 @@ class InventorySystem:
                 slot = self.__add_new_slot(identifier, amount)
             else:
                 slot.count += amount
-            self.__handle_slot_overflow(slot)
+            self.__handle_slot_overflow(slot, False)
         else:
             for _ in range(amount):
                 self.__add_new_slot(identifier, 1)
@@ -58,23 +71,36 @@ class InventorySystem:
         return True
 
     def __add_new_slot(self, identifier, amount) -> InventorySlot:
-        slot = InventorySlot(identifier, amount)
+        item = self.get_item(identifier)
+        slot = InventorySlot(identifier, item, amount)
         self.slots.append(slot)
         return slot
 
-    def __handle_slot_overflow(self, slot: InventorySlot):
-        item = self.get_item(slot.identifier)
+    def remove_item(self, identifier, amount):
+        if not self.has_enough_of_item(identifier, amount):
+            return False
 
-        if slot.count < item.max_stack:
-            return
+        slot = self.__get_slot_for_item(identifier)
+        slot.count -= amount
+        self.__handle_slot_overflow(slot, True)
 
-        slot.count = item.max_stack
+        print(f"Removed '{amount}' of item '{identifier}'")
 
-        # count_diff = abs(slot.count - item.max_stack)
-        # slot.count = item.max_stack
-        # if count_diff > 0:
-        #     self.__add_new_slot(slot.identifier, count_diff)
+        return True
+
+    def __handle_slot_overflow(self, slot: InventorySlot, is_removing_item: bool):
+        if not is_removing_item:
+            if slot.count < slot.item.max_stack:
+                return
+            slot.count = slot.item.max_stack
+        else:
+            if slot.count <= 0:
+                self.slots.remove(slot)
 
     def add_random_item(self, amount):
         identifier = self.get_random_item_identifier()
         self.add_item(identifier, amount)
+
+    def randomize_inventory(self, amount):
+        for _ in range(amount):
+            self.add_random_item(helpers.random_inclusive(1, 10))
