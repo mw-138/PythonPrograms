@@ -16,15 +16,18 @@ class InventoryItem:
         self.rarity = rarity
         self.sell_price = sell_price
         self.chance = chance
+        self.can_be_equipped = False
 
 
 class WeaponInventoryItem(InventoryItem):
     def __init__(self, label, max_stack, rarity, sell_price, chance, damage):
         super().__init__(label, max_stack, rarity, sell_price, chance)
         self.damage = damage
+        self.can_be_equipped = True
 
 
 class ArmorInventoryItem(InventoryItem):
     def __init__(self, label, max_stack, rarity, sell_price, chance, protection):
         super().__init__(label, max_stack, rarity, sell_price, chance)
         self.protection = protection
+        self.can_be_equipped = True
