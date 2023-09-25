@@ -37,6 +37,7 @@ class Fixture:
         self.home_team = home_team
         self.away_team = away_team
 
+    # TODO: Fix winner weights (Fixing no draws has messed it up)
     def determine_winner(self):
         winner_population = [self.home_team, self.away_team, None]
         draw_rating = round(abs(self.home_team.rating - self.away_team.rating))
@@ -147,7 +148,7 @@ class League:
         self.teams.sort(key=lambda x: x.sort_condition(), reverse=True)
 
     def print_league(self):
-        to_print = [f"{self.label}\n"]
+        to_print = [f"{self.label.upper()}\n"]
         pos = 1
 
         for team in self.teams:

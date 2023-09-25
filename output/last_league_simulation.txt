@@ -1,26 +1,26 @@
-Premier League
+PREMIER LEAGUE
 
-1 | MANCHESTER CITY | GP: 38 | W: 18 | D: 6 | L: 14 | GF: 55 | GA: 44 | GD: 11 | PTS: 60 | WIN CHANCE: 92%
--------------------------------------------------------------------------------------------------------------------
-2 | BURNLEY | GP: 38 | W: 18 | D: 6 | L: 14 | GF: 68 | GA: 58 | GD: 10 | PTS: 60 | WIN CHANCE: 31%
-3 | FULHAM | GP: 38 | W: 18 | D: 4 | L: 16 | GF: 71 | GA: 63 | GD: 8 | PTS: 58 | WIN CHANCE: 40%
-4 | NEWCASTLE UNITED | GP: 38 | W: 18 | D: 3 | L: 17 | GF: 60 | GA: 53 | GD: 7 | PTS: 57 | WIN CHANCE: 69%
--------------------------------------------------------------------------------------------------------------------
-5 | TOTTENHAM HOTSPUR | GP: 38 | W: 18 | D: 3 | L: 17 | GF: 56 | GA: 56 | GD: 0 | PTS: 57 | WIN CHANCE: 71%
--------------------------------------------------------------------------------------------------------------------
-6 | ASTON VILLA | GP: 38 | W: 18 | D: 3 | L: 17 | GF: 54 | GA: 56 | GD: -2 | PTS: 57 | WIN CHANCE: 59%
-7 | CRYSTAL PALACE | GP: 38 | W: 16 | D: 8 | L: 14 | GF: 55 | GA: 50 | GD: 5 | PTS: 56 | WIN CHANCE: 41%
-8 | BRIGHTON AND HOVER ALBION | GP: 38 | W: 17 | D: 4 | L: 17 | GF: 57 | GA: 55 | GD: 2 | PTS: 55 | WIN CHANCE: 69%
-9 | LIVERPOOL | GP: 38 | W: 15 | D: 9 | L: 14 | GF: 49 | GA: 42 | GD: 7 | PTS: 54 | WIN CHANCE: 72%
-10 | MANCHESTER UNITED | GP: 38 | W: 16 | D: 6 | L: 16 | GF: 58 | GA: 56 | GD: 2 | PTS: 54 | WIN CHANCE: 70%
-11 | WEST HAM UNITED | GP: 38 | W: 17 | D: 3 | L: 18 | GF: 50 | GA: 55 | GD: -5 | PTS: 54 | WIN CHANCE: 59%
-12 | EVERTON | GP: 38 | W: 15 | D: 9 | L: 14 | GF: 68 | GA: 79 | GD: -11 | PTS: 54 | WIN CHANCE: 30%
-13 | CHELSEA | GP: 38 | W: 15 | D: 8 | L: 15 | GF: 52 | GA: 55 | GD: -3 | PTS: 53 | WIN CHANCE: 42%
-14 | BRENTFORD | GP: 38 | W: 16 | D: 5 | L: 17 | GF: 53 | GA: 60 | GD: -7 | PTS: 53 | WIN CHANCE: 49%
-15 | NOTTINGHAM FOREST | GP: 38 | W: 15 | D: 7 | L: 16 | GF: 63 | GA: 66 | GD: -3 | PTS: 52 | WIN CHANCE: 49%
-16 | ARSENAL | GP: 38 | W: 16 | D: 4 | L: 18 | GF: 57 | GA: 62 | GD: -5 | PTS: 52 | WIN CHANCE: 80%
-17 | SHEFFIELD UNITED | GP: 38 | W: 14 | D: 8 | L: 16 | GF: 66 | GA: 65 | GD: 1 | PTS: 50 | WIN CHANCE: 19%
--------------------------------------------------------------------------------------------------------------------
-18 | LUTON TOWN | GP: 38 | W: 13 | D: 10 | L: 15 | GF: 75 | GA: 77 | GD: -2 | PTS: 49 | WIN CHANCE: 20%
-19 | BOURNEMOUTH | GP: 38 | W: 15 | D: 4 | L: 19 | GF: 59 | GA: 70 | GD: -11 | PTS: 49 | WIN CHANCE: 47%
-20 | WOLVERHAMPTON WANDERERS | GP: 38 | W: 13 | D: 8 | L: 17 | GF: 54 | GA: 58 | GD: -4 | PTS: 47 | WIN CHANCE: 47%
+1 | WOLVERHAMPTON WANDERERS | GP: 38 | W: 19 | D: 3 | L: 16 | GF: 52 | GA: 51 | GD: 1 | PTS: 60 | WIN CHANCE: 51%
+---------------------------------------------------------------------------------------------------------------------
+2 | NEWCASTLE UNITED | GP: 38 | W: 18 | D: 4 | L: 16 | GF: 52 | GA: 50 | GD: 2 | PTS: 58 | WIN CHANCE: 71%
+3 | MANCHESTER CITY | GP: 38 | W: 17 | D: 6 | L: 15 | GF: 61 | GA: 54 | GD: 7 | PTS: 57 | WIN CHANCE: 90%
+4 | EVERTON | GP: 38 | W: 18 | D: 3 | L: 17 | GF: 48 | GA: 44 | GD: 4 | PTS: 57 | WIN CHANCE: 31%
+---------------------------------------------------------------------------------------------------------------------
+5 | MANCHESTER UNITED | GP: 38 | W: 17 | D: 6 | L: 15 | GF: 57 | GA: 53 | GD: 4 | PTS: 57 | WIN CHANCE: 70%
+---------------------------------------------------------------------------------------------------------------------
+6 | FULHAM | GP: 38 | W: 17 | D: 5 | L: 16 | GF: 76 | GA: 65 | GD: 11 | PTS: 56 | WIN CHANCE: 42%
+7 | LUTON TOWN | GP: 38 | W: 16 | D: 8 | L: 14 | GF: 58 | GA: 52 | GD: 6 | PTS: 56 | WIN CHANCE: 21%
+8 | WEST HAM UNITED | GP: 38 | W: 18 | D: 2 | L: 18 | GF: 70 | GA: 70 | GD: 0 | PTS: 56 | WIN CHANCE: 60%
+9 | CHELSEA | GP: 38 | W: 16 | D: 7 | L: 15 | GF: 49 | GA: 50 | GD: -1 | PTS: 55 | WIN CHANCE: 40%
+10 | ASTON VILLA | GP: 38 | W: 17 | D: 4 | L: 17 | GF: 57 | GA: 59 | GD: -2 | PTS: 55 | WIN CHANCE: 59%
+11 | SHEFFIELD UNITED | GP: 38 | W: 14 | D: 12 | L: 12 | GF: 80 | GA: 74 | GD: 6 | PTS: 54 | WIN CHANCE: 20%
+12 | ARSENAL | GP: 38 | W: 17 | D: 3 | L: 18 | GF: 59 | GA: 55 | GD: 4 | PTS: 54 | WIN CHANCE: 79%
+13 | LIVERPOOL | GP: 38 | W: 16 | D: 6 | L: 16 | GF: 56 | GA: 59 | GD: -3 | PTS: 54 | WIN CHANCE: 71%
+14 | BRENTFORD | GP: 38 | W: 16 | D: 6 | L: 16 | GF: 48 | GA: 56 | GD: -8 | PTS: 54 | WIN CHANCE: 51%
+15 | CRYSTAL PALACE | GP: 38 | W: 16 | D: 5 | L: 17 | GF: 52 | GA: 49 | GD: 3 | PTS: 53 | WIN CHANCE: 39%
+16 | BOURNEMOUTH | GP: 38 | W: 15 | D: 7 | L: 16 | GF: 53 | GA: 59 | GD: -6 | PTS: 52 | WIN CHANCE: 49%
+17 | BRIGHTON AND HOVER ALBION | GP: 38 | W: 16 | D: 3 | L: 19 | GF: 60 | GA: 63 | GD: -3 | PTS: 51 | WIN CHANCE: 69%
+---------------------------------------------------------------------------------------------------------------------
+18 | TOTTENHAM HOTSPUR | GP: 38 | W: 15 | D: 6 | L: 17 | GF: 52 | GA: 58 | GD: -6 | PTS: 51 | WIN CHANCE: 70%
+19 | NOTTINGHAM FOREST | GP: 38 | W: 16 | D: 3 | L: 19 | GF: 57 | GA: 65 | GD: -8 | PTS: 51 | WIN CHANCE: 48%
+20 | BURNLEY | GP: 38 | W: 13 | D: 7 | L: 18 | GF: 44 | GA: 55 | GD: -11 | PTS: 46 | WIN CHANCE: 27%
