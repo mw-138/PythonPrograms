@@ -17,7 +17,7 @@ class ContactEncoder(json.JSONEncoder):
 class ContactBook:
     def __init__(self):
         self.contacts = []
-        self.file_name = "contact_book.txt"
+        self.file_name = "output/contact_book.txt"
 
     def __does_file_exist(self):
         return os.path.exists(self.file_name)
