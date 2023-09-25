@@ -11,4 +11,4 @@ class QRCodeGenerator:
         qr_code.make(fit=True)
         qr_code.print_ascii()
         img = qr_code.make_image(fill='black', back_color='white')
-        img.save('output/qrcode.png')
+        img.save('output/qr_code.png')
