@@ -4,7 +4,7 @@ import helpers
 from enum import Enum
 from text_adventure_game.player import Player
 from text_adventure_game.enemy import Enemy
-from text_adventure_game.inventory_item import ItemRarity, WeaponInventoryItem
+from text_adventure_game.inventory_item import ItemRarity, WeaponInventoryItem, ArmorInventoryItem
 
 
 class AdventureScenario(Enum):
@@ -14,7 +14,7 @@ class AdventureScenario(Enum):
 
 class TextAdventureGame:
     def __init__(self):
-        self.player = Player(100)
+        self.player = Player(100, 10)
         self.revive_cost = 100
 
     def __print_player_info(self):
@@ -28,16 +28,99 @@ class TextAdventureGame:
             f"{lvl.get_experience_progress()}% {lvl.get_experience_progress_bar()}"
         ])
 
-    def __print_player_inventory(self):
+    def __open_player_inventory(self):
         formatted_inventory = [f"Inventory ({len(self.player.inventory.slots)}):\n"]
+        slot_index = 0
+
         for inv_slot in self.player.inventory.slots:
-            item = self.player.inventory.get_item(inv_slot.identifier)
+            item = inv_slot.item
+
             base_str = f"x{inv_slot.count:,} {ItemRarity(item.rarity.value).name} {item.label} (Value: {item.sell_price * inv_slot.count:,})"
+            additional_str = base_str
+
+            if inv_slot.is_equipped:
+                additional_str = f"[Equipped] {additional_str}"
+
             if type(item) == WeaponInventoryItem:
-                formatted_inventory.append(f"{base_str} (DMG: {item.damage:,})")
-            else:
-                formatted_inventory.append(base_str)
+                additional_str += f" (DMG: {item.damage:,})"
+            elif type(item) == ArmorInventoryItem:
+                additional_str += f" (Protection: {item.protection:,})"
+
+            final_str = f"[{slot_index}] {additional_str}"
+            formatted_inventory.append(final_str)
+            slot_index += 1
+
         helpers.print_string_section('-', formatted_inventory)
+
+        helpers.print_string_section('-', [
+            "Select action:",
+            "[0] Exit",
+            "[1] Equip Item",
+            "[2] Sell Item",
+            # "[3] Sell Multiple Items",
+        ])
+        try:
+            player_input = int(input("Enter number: "))
+            if player_input == 0:
+                return
+            elif player_input == 1:
+                try:
+                    item_index = int(input("Enter item index: "))
+
+                    if not self.player.inventory.is_index_valid(item_index):
+                        print("Invalid item index")
+                        return
+
+                    selected_slot = self.player.inventory.slots[item_index]
+
+                    if issubclass(type(selected_slot.item), WeaponInventoryItem):
+                        self.player.equip_weapon_slot(selected_slot)
+                    elif issubclass(type(selected_slot.item), ArmorInventoryItem):
+                        self.player.equip_helmet_slot(selected_slot)
+                except ValueError:
+                    print("Invalid input")
+
+            elif player_input == 2:
+                try:
+                    item_index = int(input("Enter item index: "))
+
+                    if not self.player.inventory.is_index_valid(item_index):
+                        print("Invalid item index")
+                        return
+
+                    selected_slot = self.player.inventory.slots[item_index]
+                    amount_to_sell = int(input(f"Enter amount (Max: {selected_slot.count:,}): "))
+                    self.__sell_item(selected_slot, amount_to_sell)
+                except ValueError:
+                    print("Invalid input")
+
+            # elif player_input == 3:
+            #     item_indexes = input("Enter item indexes (Ex: 3 7 5): ")
+            #     item_indexes = item_indexes.split(" ")
+            #
+            #     for item_index in item_indexes:
+            #         item_index = int(item_index)
+            #
+            #         if not self.player.inventory.is_index_valid(item_index):
+            #             print("Invalid item index")
+            #             return
+            #
+            #         selected_slot = self.player.inventory.slots[item_index]
+            #         amount_to_sell = int(input(f"Enter amount (Max: {selected_slot.count:,}): "))
+            #         self.__sell_item(selected_slot, amount_to_sell)
+        except ValueError:
+            print("Invalid input")
+
+    def __sell_item(self, slot, amount):
+        if amount <= slot.count:
+            sell_value = slot.item.sell_price * amount
+            if self.player.inventory.remove_item(slot.identifier, amount):
+                self.player.give_gold(sell_value)
+                print(f"Sold x{amount:,} {slot.item.label} for {sell_value:,} gold")
+            else:
+                print(f"Unable to sell x{amount:,} {slot.item.label}")
+        else:
+            print(f"Unable to sell x{amount:,} {slot.item.label}")
 
     def __do_return_countdown(self, timer):
         for _ in range(timer, 0, -1):
@@ -57,10 +140,9 @@ class TextAdventureGame:
             enemy = self.__generate_random_enemy()
             player_turn = True
             while not enemy.is_dead():
-                player_damage = helpers.random_inclusive(10, 20)
-                enemy.deal_damage(player_damage) if player_turn else self.player.deal_damage(enemy.damage)
+                enemy.deal_damage(self.player.damage) if player_turn else self.player.deal_damage(enemy.damage)
                 helpers.print_string_section('-', [
-                    f"Player dealt {player_damage:,} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage:,} damage to player",
+                    f"Player dealt {self.player.damage:,} damage to enemy" if player_turn else f"Enemy dealt {enemy.damage:,} damage to player",
                     f"Player: {self.player.current_health:,}/{self.player.max_health:,} {self.player.get_health_progress_bar()}",
                     f"Enemy: {enemy.current_health:,}/{enemy.max_health:,} {enemy.get_health_progress_bar()}",
                 ])
@@ -97,9 +179,12 @@ class TextAdventureGame:
             print(f"[{item_index}] {item} - 0 Gold")
             item_index += 1
 
-        player_input = input("What would you like to purchase? (Enter 'x' to leave) ")
-        if player_input.lower() == "x":
-            return
+        try:
+            player_input = input("What would you like to purchase? (Enter 'x' to leave) ")
+            if player_input.lower() == "x":
+                return
+        except ValueError:
+            print("Invalid input")
 
     def __get_random_adventure_scenario(self):
         return random.choice(list(AdventureScenario))
@@ -115,19 +200,23 @@ class TextAdventureGame:
             helpers.print_string_section('-', ["You don't need to heal!"])
 
     def start(self):
+        # self.player.inventory.randomize_inventory(10)
         while True:
             if self.player.is_dead():
                 helpers.print_string_section('-', [
                     "What do you want to do?",
                     f"[0] Heal for {self.revive_cost:,} gold",
                 ])
-                player_input = int(input("Enter number: "))
-                if player_input == 0:
-                    if self.player.has_enough_gold(self.revive_cost):
-                        self.player.revive()
-                    else:
-                        print("You don't have enough gold to revive. Game over.")
-                        break
+                try:
+                    player_input = int(input("Enter number: "))
+                    if player_input == 0:
+                        if self.player.has_enough_gold(self.revive_cost):
+                            self.player.revive()
+                        else:
+                            print("You don't have enough gold to revive. Game over.")
+                            break
+                except ValueError:
+                    print("Invalid input")
             else:
                 helpers.print_string_section('-', [
                     "What do you want to do?",
@@ -137,14 +226,17 @@ class TextAdventureGame:
                     "[3] View Inventory",
                     f"[4] Heal for {self.player.get_revive_cost():,} gold"
                 ])
-                player_input = int(input("Enter number: "))
-                if player_input == 0:
-                    self.__go_on_adventure()
-                elif player_input == 1:
-                    self.__visit_vendor()
-                elif player_input == 2:
-                    self.__print_player_info()
-                elif player_input == 3:
-                    self.__print_player_inventory()
-                elif player_input == 4:
-                    self.__heal_player_for_gold()
+                try:
+                    player_input = int(input("Enter number: "))
+                    if player_input == 0:
+                        self.__go_on_adventure()
+                    elif player_input == 1:
+                        self.__visit_vendor()
+                    elif player_input == 2:
+                        self.__print_player_info()
+                    elif player_input == 3:
+                        self.__open_player_inventory()
+                    elif player_input == 4:
+                        self.__heal_player_for_gold()
+                except ValueError:
+                    print("Invalid input")
