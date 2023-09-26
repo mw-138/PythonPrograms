@@ -1,5 +1,7 @@
 import json
+import random
 import helpers
+import requests
 
 
 class Contact:
@@ -46,9 +48,28 @@ class ContactBook:
         self.contacts.append(contact)
         self.__save()
 
-    def __remove_contact(self, index):
-        self.contacts.pop(index)
-        self.__save()
+    def __remove_contact(self):
+        try:
+            index = int(input("Enter index: "))
+            self.contacts.pop(index)
+            self.__save()
+        except ValueError:
+            print("Invalid input")
+
+    def __add_new_contact(self):
+        first_name = input("Enter first name: ")
+        last_name = input("Enter last name: ")
+        phone_number = int(input("Enter phone number: "))
+        self.__add_contact(Contact(first_name, last_name, phone_number))
+
+    def __add_random_contact(self):
+        response = requests.get("https://randomuser.me/api/")
+        response_json = json.loads(response.text)
+        results = response_json['results']
+        random_result = results[random.randrange(0, len(results))]
+        random_name = random_result['name']
+        random_contact = Contact(random_name['first'], random_name['last'], random_result['phone'])
+        self.__add_contact(random_contact)
 
     def __list_contacts(self):
         contact_index = 0
@@ -65,17 +86,9 @@ class ContactBook:
     def start(self):
         self.__load()
         while True:
-            user_input = input("Input action ('list', 'add', 'remove'): ")
-
-            if user_input == "list":
-                self.__list_contacts()
-            elif user_input == "add":
-                first_name = input("Enter first name: ")
-                last_name = input("Enter last name: ")
-                phone_number = int(input("Enter phone number: "))
-                self.__add_contact(Contact(first_name, last_name, phone_number))
-            elif user_input == "remove":
-                index = int(input("Enter index: "))
-                self.__remove_contact(index)
-            else:
-                print("Invalid action")
+            helpers.input_section("Input action", '-', [
+                {"text": "List", "func": self.__list_contacts},
+                {"text": "Add", "func": self.__add_new_contact},
+                {"text": "Add Random", "func": self.__add_random_contact},
+                {"text": "Remove", "func": self.__remove_contact},
+            ])
