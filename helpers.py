@@ -67,3 +67,7 @@ def save_to_file(file_name, content):
     file_action = "w" if does_file_exist(file_name) else "x"
     with open(file_name, file_action) as file:
         file.write(content)
+
+
+def is_list_index_valid(list_to_check, index):
+    return index >= 0 or index <= len(list_to_check) - 1

@@ -10,7 +10,9 @@ from request_testing import TestRequest
 from qr_code_generator import QRCodeGenerator
 from text_adventure_game.main import TextAdventureGame
 from football_league_table import FootballLeagueTable
-
+from tic_tac_toe import TicTacToe
+from test_gui_program import TestGuiProgram
+from gui_clock import GuiClock
 
 # Quiz([
 #     Question("What is 2+2?", "4"),
@@ -25,7 +27,7 @@ from football_league_table import FootballLeagueTable
 
 # Hangman(["secret", "hello", "world"]).start()
 
-# Timer(1, 2, 0).start()
+# Timer(0, 25, 0).start()
 
 # RockPaperScissors().start()
 
@@ -35,6 +37,12 @@ from football_league_table import FootballLeagueTable
 
 # QRCodeGenerator("https://www.google.co.uk").generate()
 
-TextAdventureGame().start()
+# TextAdventureGame().start()
 
 # FootballLeagueTable().start()
+
+# TicTacToe().start()
+
+TestGuiProgram()
+
+# GuiClock()
