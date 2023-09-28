@@ -9,6 +9,18 @@ class ItemRarity(Enum):
     Legendary = 5
 
 
+__rarity_weights = {
+    ItemRarity.Common: 80,
+    ItemRarity.Uncommon: 70,
+    ItemRarity.Rare: 50,
+    ItemRarity.Epic: 10,
+    ItemRarity.Legendary: 5
+}
+
+
+# TODO: Make rarity weight chances increase based on player level
+# TODO: Maybe add levelling to item
+# TODO: Remove rarity from constructor, add weighted chances to rarity and give item random rarity on construction
 class InventoryItem:
     def __init__(self, label, max_stack, rarity, sell_price, chance):
         self.label = label
