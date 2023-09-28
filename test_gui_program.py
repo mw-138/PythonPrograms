@@ -31,7 +31,7 @@ class TestGuiProgram(ctk.CTk):
         self.header = ctk.CTkFrame(self, fg_color='orange', height=50, corner_radius=0)
         self.header.pack(side='top', fill='x')
 
-        self.header_label = ctk.CTkLabel(self.header, text="Header", font=("Arial", 18), text_color='black')
+        self.header_label = ctk.CTkLabel(self.header, text="Header", font=self.__get_font(18), text_color='black')
         self.header_label.pack()
 
         # self.grid_columnconfigure(1, weight=1)
@@ -55,3 +55,6 @@ class TestGuiProgram(ctk.CTk):
         #                                                      values=["Light", "Dark", "System"])
 
         self.mainloop()
+
+    def __get_font(self, size):
+        return "Arial", size
