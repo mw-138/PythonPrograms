@@ -15,3 +15,13 @@ Created in PyCharm
 - [QR Code Generator](qr_code_generator.py)
 - [Text Adventure Game (WIP)](text_adventure_game/main.py)
 - [Football League Table](football_league_table.py)
+- [Test GUI Program](test_gui_program.py)
+- [GUI Clock](gui_clock.py)
+
+## Packages Used:
+- [future](https://pypi.org/project/future/)
+  - Adds tkinter
+- [customtkinter](https://pypi.org/project/customtkinter/)
+- [qrcode](https://pypi.org/project/qrcode/)
+- [requests](https://pypi.org/project/requests/)
+- [events](https://pypi.org/project/events/)
