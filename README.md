@@ -15,6 +15,7 @@ Created in PyCharm
 - [QR Code Generator](qr_code_generator.py)
 - [Text Adventure Game (WIP)](text_adventure_game/main.py)
 - [Football League Table](football_league_table.py)
+- [Tic Tac Toe](tic_tac_toe.py)
 - [Test GUI Program](test_gui_program.py)
 - [GUI Clock](gui_clock.py)
 
