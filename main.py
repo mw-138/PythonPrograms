@@ -35,7 +35,7 @@ from gui_clock import GuiClock
 
 # TestRequest().start()
 
-# QRCodeGenerator("https://www.google.co.uk").generate()
+QRCodeGenerator()
 
 # TextAdventureGame().start()
 
@@ -43,6 +43,6 @@ from gui_clock import GuiClock
 
 # TicTacToe().start()
 
-TestGuiProgram()
+# TestGuiProgram()
 
 # GuiClock()
