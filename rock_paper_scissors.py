@@ -3,6 +3,9 @@ import time
 
 
 class RockPaperScissors:
+    def __init__(self):
+        self.__start()
+
     def __is_win(self, player, computer):
         return (player == "r" and computer == "s") or (player == "s" and computer == "p") or (
                 player == "p" and computer == "r")
@@ -15,7 +18,7 @@ class RockPaperScissors:
         }
         return option_labels[option]
 
-    def start(self):
+    def __start(self):
         player_choice = input("Enter choice (r/p/s): ")
         random_choice = random.choice(["r", "p", "s"])
 

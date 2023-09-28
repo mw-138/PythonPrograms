@@ -4,8 +4,6 @@ import random
 class NumberGuesser:
     def __init__(self, max_range):
         self.max_range = max_range
-
-    def start(self):
         random_number = random.randrange(0, self.max_range + 1)
         player_input = -1
         tries = 0

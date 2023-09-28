@@ -8,7 +8,6 @@ class Quiz:
     def __init__(self, questions):
         self.questions = questions
 
-    def start(self):
         score = 0
         question_number = 1
 

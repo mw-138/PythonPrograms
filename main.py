@@ -17,23 +17,23 @@ from gui_clock import GuiClock
 # Quiz([
 #     Question("What is 2+2?", "4"),
 #     Question("What is the capital of England?", "London")
-# ]).start()
+# ])
 
 # Blackjack().start()
 
-# NumberGuesser(100).start()
+# NumberGuesser(100)
 
-# PasswordGenerator(100).generate()
+# PasswordGenerator(100)
 
 # Hangman(["secret", "hello", "world"]).start()
 
-# Timer(0, 25, 0).start()
+# Timer(0, 25, 0)
 
-# RockPaperScissors().start()
+# RockPaperScissors()
 
 # ContactBook().start()
 
-# TestRequest().start()
+# TestRequest()
 
 QRCodeGenerator()
 

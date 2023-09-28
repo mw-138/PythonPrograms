@@ -7,7 +7,6 @@ class Timer:
         self.minutes = minutes
         self.seconds = seconds
 
-    def start(self):
         while True:
             if self.hours == 0 and self.minutes == 0 and self.seconds == 0:
                 break
