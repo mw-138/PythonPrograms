@@ -13,6 +13,7 @@ class TestGuiProgram(ctk.CTk):
         self.geometry("1280x720")
         self.resizable(False, False)
         ctk.set_default_color_theme("blue")
+        self._set_appearance_mode('dark')
 
         if self.menu_bar_enabled:
             self.menubar = tk.Menu(self)
@@ -28,11 +29,36 @@ class TestGuiProgram(ctk.CTk):
                 self.menubar.add_cascade(menu=file_menu, label=menu["label"])
             self.config(menu=self.menubar)
 
-        self.header = ctk.CTkFrame(self, fg_color='orange', height=50, corner_radius=0)
-        self.header.pack(side='top', fill='x')
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
-        self.header_label = ctk.CTkLabel(self.header, text="Header", font=self.__get_font(18), text_color='black')
-        self.header_label.pack()
+        side_bar_width = 200
+        self.side_bar = ctk.CTkFrame(
+            self,
+            width=side_bar_width,
+            height=self._current_height,
+            fg_color='#202020',
+            corner_radius=0
+        )
+        self.side_bar.grid(column=0, row=0, sticky='w')
+
+        # self.button = ctk.CTkButton(self.side_bar, text="Button")
+        # self.button.pack()
+
+        self.content = ctk.CTkFrame(
+            self,
+            width=self._current_width - side_bar_width,
+            height=self._current_height,
+            fg_color='#222222',
+            corner_radius=0
+        )
+        self.content.grid(column=1, row=0, sticky='e')
+
+        # self.header = ctk.CTkFrame(self, fg_color='orange', height=50, corner_radius=0)
+        # self.header.pack(side='top', fill='x')
+        #
+        # self.header_label = ctk.CTkLabel(self.header, text="Header", font=self.__get_font(18), text_color='black')
+        # self.header_label.pack()
 
         # self.grid_columnconfigure(1, weight=1)
         # self.grid_columnconfigure((2, 3), weight=0)

@@ -35,7 +35,7 @@ from gui_clock import GuiClock
 
 # TestRequest()
 
-QRCodeGenerator()
+# QRCodeGenerator()
 
 # TextAdventureGame().start()
 
