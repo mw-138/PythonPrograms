@@ -39,9 +39,9 @@ from gui_clock import GuiClock
 
 # TextAdventureGame().start()
 
-# FootballLeagueTable().start()
+FootballLeagueTable()
 
-# TicTacToe().start()
+# TicTacToe()
 
 # TestGuiProgram()
 

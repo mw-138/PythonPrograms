@@ -37,15 +37,14 @@ class Fixture:
         self.home_team = home_team
         self.away_team = away_team
 
-    # TODO: Fix winner weights (Fixing no draws has messed it up)
     def determine_winner(self):
-        winner_population = [self.home_team, self.away_team, None]
+        result_population = [self.home_team, self.away_team, None]
         draw_rating = round(abs(self.home_team.rating - self.away_team.rating))
-        winner_weights = [self.home_team.rating, self.away_team.rating, draw_rating]
-        winner = random.choices(population=winner_population, weights=winner_weights, k=1)[0]
-        did_teams_draw = winner is None
-        did_home_win = not did_teams_draw or self.home_team == winner
-        did_away_win = not did_teams_draw or self.away_team == winner
+        result_weights = [self.home_team.rating, self.away_team.rating, draw_rating]
+        result = random.choices(population=result_population, weights=result_weights, k=1)[0]
+        did_teams_draw = result is None
+        did_home_win = not did_teams_draw and self.home_team == result
+        did_away_win = not did_teams_draw and self.away_team == result
 
         goal_weights = {
             0: 80,
@@ -180,8 +179,6 @@ class League:
 class FootballLeagueTable:
     def __init__(self):
         self.league = premier_league
-
-    def start(self):
         self.league.simulate_fixtures()
         self.league.sort_league()
         self.league.print_league()
