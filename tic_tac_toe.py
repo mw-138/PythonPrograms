@@ -10,6 +10,9 @@ class TicTacToe:
         self.empty_symbol = "-"
         self.grid = [self.empty_symbol] * 9
 
+        while self.is_game_active:
+            self.__ask_for_input()
+
     def __print_grid(self):
         print(f"{self.grid[0]} | {self.grid[1]} | {self.grid[2]}\n"
               f"{self.grid[3]} | {self.grid[4]} | {self.grid[5]}\n"
@@ -93,7 +96,3 @@ class TicTacToe:
                     return True, self.ai_symbol
 
         return False, None
-
-    def start(self):
-        while self.is_game_active:
-            self.__ask_for_input()
