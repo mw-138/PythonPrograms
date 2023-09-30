@@ -71,3 +71,13 @@ def save_to_file(file_name, content):
 
 def is_list_index_valid(list_to_check, index):
     return index >= 0 or index <= len(list_to_check) - 1
+
+
+def dictionary_to_random_choices(dictionary):
+    population = []
+    weights = []
+    for key in dictionary:
+        value = dictionary[key]
+        population.append(key)
+        weights.append(value)
+    return population, weights
