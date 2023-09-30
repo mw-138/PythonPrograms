@@ -37,9 +37,9 @@ from gui_clock import GuiClock
 
 # QRCodeGenerator()
 
-# TextAdventureGame().start()
+TextAdventureGame()
 
-FootballLeagueTable()
+# FootballLeagueTable()
 
 # TicTacToe()
 

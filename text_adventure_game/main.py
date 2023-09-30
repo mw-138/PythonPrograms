@@ -4,7 +4,7 @@ import helpers
 from enum import Enum
 from text_adventure_game.player import Player
 from text_adventure_game.enemy import Enemy
-from text_adventure_game.inventory_item import ItemRarity, WeaponInventoryItem, ArmorInventoryItem
+from text_adventure_game.inventory_item import ItemRarity, WeaponInventoryItem, ArmorInventoryItem, HealingInventoryItem
 
 
 class AdventureScenario(Enum):
@@ -17,6 +17,7 @@ class TextAdventureGame:
         self.player = Player(100, 10)
         self.revive_cost = 100
         self.is_game_active = True
+        self.__start()
 
     def __print_player_info(self):
         ply = self.player
@@ -53,65 +54,62 @@ class TextAdventureGame:
 
         helpers.print_string_section('-', formatted_inventory)
 
-        # TODO: Add input section helper
-        helpers.print_string_section('-', [
-            "Select action:",
-            "[0] Exit",
-            "[1] Equip Item",
-            "[2] Sell Item",
-            # "[3] Sell Multiple Items",
+        def __try_equip():
+            try:
+                item_index = int(input("Enter item index: "))
+
+                if not self.player.inventory.is_index_valid(item_index):
+                    print("Invalid item index")
+                    return
+
+                selected_slot = self.player.inventory.slots[item_index]
+
+                if issubclass(type(selected_slot.item), WeaponInventoryItem):
+                    self.player.equip_weapon_slot(selected_slot)
+                elif issubclass(type(selected_slot.item), ArmorInventoryItem):
+                    self.player.equip_helmet_slot(selected_slot)
+            except ValueError:
+                print("Invalid input")
+
+        def __try_sell():
+            try:
+                item_index = int(input("Enter item index: "))
+
+                if not self.player.inventory.is_index_valid(item_index):
+                    print("Invalid item index")
+                    return
+
+                selected_slot = self.player.inventory.slots[item_index]
+                amount_to_sell = int(input(f"Enter amount (Max: {selected_slot.count:,}): "))
+                self.__sell_item(selected_slot, amount_to_sell)
+            except ValueError:
+                print("Invalid input")
+
+        def __try_use():
+            try:
+                item_index = int(input("Enter item index: "))
+
+                if not self.player.inventory.is_index_valid(item_index):
+                    print("Invalid item index")
+                    return
+
+                selected_slot = self.player.inventory.slots[item_index]
+
+                if issubclass(type(selected_slot.item), HealingInventoryItem):
+                    heal_percentage = selected_slot.item.heal_amount
+                    heal_amount = (self.player.current_health / self.player.max_health) * heal_percentage
+                    self.player.heal(heal_amount)
+                    self.player.inventory.remove_item(selected_slot.identifier, 1)
+                    print(f"Healed player for {heal_amount} HP")
+            except ValueError:
+                print("Invalid input")
+
+        helpers.input_section("Select action:", '-', [
+            {"text": "Exit", "func": None},
+            {"text": "Equip Item", "func": __try_equip},
+            {"text": "Use Item", "func": __try_use},
+            {"text": "Sell Item", "func": __try_sell},
         ])
-        try:
-            player_input = int(input("Enter number: "))
-            if player_input == 0:
-                return
-            elif player_input == 1:
-                try:
-                    item_index = int(input("Enter item index: "))
-
-                    if not self.player.inventory.is_index_valid(item_index):
-                        print("Invalid item index")
-                        return
-
-                    selected_slot = self.player.inventory.slots[item_index]
-
-                    if issubclass(type(selected_slot.item), WeaponInventoryItem):
-                        self.player.equip_weapon_slot(selected_slot)
-                    elif issubclass(type(selected_slot.item), ArmorInventoryItem):
-                        self.player.equip_helmet_slot(selected_slot)
-                except ValueError:
-                    print("Invalid input")
-
-            elif player_input == 2:
-                try:
-                    item_index = int(input("Enter item index: "))
-
-                    if not self.player.inventory.is_index_valid(item_index):
-                        print("Invalid item index")
-                        return
-
-                    selected_slot = self.player.inventory.slots[item_index]
-                    amount_to_sell = int(input(f"Enter amount (Max: {selected_slot.count:,}): "))
-                    self.__sell_item(selected_slot, amount_to_sell)
-                except ValueError:
-                    print("Invalid input")
-
-            # elif player_input == 3:
-            #     item_indexes = input("Enter item indexes (Ex: 3 7 5): ")
-            #     item_indexes = item_indexes.split(" ")
-            #
-            #     for item_index in item_indexes:
-            #         item_index = int(item_index)
-            #
-            #         if not self.player.inventory.is_index_valid(item_index):
-            #             print("Invalid item index")
-            #             return
-            #
-            #         selected_slot = self.player.inventory.slots[item_index]
-            #         amount_to_sell = int(input(f"Enter amount (Max: {selected_slot.count:,}): "))
-            #         self.__sell_item(selected_slot, amount_to_sell)
-        except ValueError:
-            print("Invalid input")
 
     def __sell_item(self, slot, amount):
         if amount <= slot.count:
@@ -215,8 +213,8 @@ class TextAdventureGame:
             print("You don't have enough gold to revive. Game over.")
             self.is_game_active = False
 
-    def start(self):
-        # self.player.inventory.randomize_inventory(10)
+    def __start(self):
+        self.player.inventory.randomize_inventory(10)
         while self.is_game_active:
             if self.player.is_dead():
                 helpers.input_section("What do you want to do?", '-', [
