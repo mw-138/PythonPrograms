@@ -1,5 +1,6 @@
 import random
 import helpers
+import customtkinter as ctk
 
 
 class Team:
@@ -12,6 +13,7 @@ class Team:
         self.games_lost = 0
         self.goals_for = 0
         self.goals_against = 0
+        self.league_info = ""
 
     def get_games_played(self):
         return self.games_won + self.games_drawn + self.games_lost
@@ -117,7 +119,6 @@ class League:
         self.teams = teams
         self.fixtures = self.__generate_fixtures()
         self.team_dividers = team_dividers
-        self.print_output = ""
 
     def __generate_fixtures(self):
         fixtures = []
@@ -130,7 +131,7 @@ class League:
         random.shuffle(fixtures)
         return fixtures
 
-    def get_fixtures_for_team(self, team):
+    def __get_fixtures_for_team(self, team):
         fixtures = []
 
         for fixture in self.fixtures:
@@ -139,20 +140,20 @@ class League:
 
         return fixtures
 
-    def simulate_fixtures(self):
+    def __simulate_fixtures(self):
         for fixture in self.fixtures:
             fixture.determine_winner()
 
-    def sort_league(self):
+    def __sort_league(self):
         self.teams.sort(key=lambda x: x.sort_condition(), reverse=True)
 
-    def print_league(self):
-        to_print = [f"{self.label.upper()}\n"]
-        pos = 1
-
-        for team in self.teams:
-            to_print.append(
-                f"{pos} | "
+    def generate(self):
+        self.__simulate_fixtures()
+        self.__sort_league()
+        for team_index in range(len(self.teams)):
+            team = self.teams[team_index]
+            team.league_info = (
+                f"{team_index + 1} | "
                 f"{team.label.upper()} | "
                 f"GP: {team.get_games_played()} | "
                 f"W: {team.games_won} | "
@@ -164,24 +165,28 @@ class League:
                 f"PTS: {team.get_points()} | "
                 f"WIN CHANCE: {team.get_win_chance()}%"
             )
-            pos += 1
-
-        for divider in self.team_dividers:
-            to_print.insert(divider + 1, "-" * helpers.get_list_max_length(to_print))
-
-        helpers.print_string_section('-', to_print)
-
-        for entry in to_print:
-            self.print_output += f"{entry}\n"
-        helpers.save_to_file("output/last_league_simulation.txt", self.print_output)
 
 
-class FootballLeagueTable:
+class FootballLeagueTable(ctk.CTk):
     def __init__(self):
+        super().__init__()
         self.league = premier_league
-        self.league.simulate_fixtures()
-        self.league.sort_league()
-        self.league.print_league()
+        self.league.generate()
+
+        self.title(f"Football League Simulator - {self.league.label}")
+        self.geometry("1280x720")
+        self.resizable(False, False)
+
+        for i in range(len(self.league.teams)):
+            self.grid_rowconfigure(i, weight=1)
+            team = self.league.teams[i]
+            frame_color = '#202020' if i % 2 else '#303030'
+            team_frame = ctk.CTkFrame(self, corner_radius=0, fg_color=frame_color)
+            team_row = ctk.CTkLabel(team_frame, text=f"{team.league_info}")
+            team_row.grid(column=0, row=i, padx=3, pady=3)
+            team_frame.pack(expand=True, fill='both')
+
+        self.mainloop()
 
 
 premier_league = League("Premier League", [
